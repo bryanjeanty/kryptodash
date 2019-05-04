@@ -1,37 +1,42 @@
+// imports
 import React, { Component } from "react";
-import axios from "axios";
-import getConfig from "next/config";
+import { axiosCMC } from "../api/axios";
 
-const { publicRuntimeConfig } = getConfig();
-const { CMC_KEY } = publicRuntimeConfig;
-const proxyUrl = "https://damp-cove-73616.herokuapp.com/";
-const baseUrl = "https://pro-api.coinmarketcap.com";
-const getCryptocurrency = "/v1/cryptocurrency/listings/latest";
-const axiosConfig = {
-  method: "get",
-  baseURL: proxyUrl + baseUrl + getCryptocurrency,
-  withCredentials: false,
-  headers: {
-    "X-CMC_PRO_API_KEY": CMC_KEY
-  }
-};
+// cmc api
+const cryptosEndpoint = "/v1/cryptocurrency/listings/latest";
+const cryptosQuery = "?limit=20";
 
 class Index extends Component {
-  componentDidMount() {
-    this.getCryptos();
-  }
+  state = {
+    cryptoList: []
+  };
 
   getCryptos = async () => {
     try {
-      const { data } = await axios.create(axiosConfig);
-      console.log(data);
+      const response = await axiosCMC(cryptosEndpoint, cryptosQuery);
+      this.setState({ cryptoList: response.data });
     } catch (error) {
-      console.error("CMC fetch error", error);
+      console.log(error);
     }
   };
 
   render() {
-    return <div>Home Page</div>;
+    const { cryptoList } = this.state;
+
+    return (
+      <div>
+        <button onClick={this.getCryptos}>Get Cryptos</button>
+        {cryptoList ? (
+          <ul>
+            {cryptoList.map(crypto => (
+              <li key={crypto.id}>{crypto.name}</li>
+            ))}
+          </ul>
+        ) : (
+          <ul>No Data</ul>
+        )}
+      </div>
+    );
   }
 }
 
