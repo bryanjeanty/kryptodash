@@ -3,6 +3,10 @@ const express = require('express');
 const session = require('express-session');
 const next = require('next');
 const mongoose = require('mongoose');
+const validator = require('express-validator');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const compression = require('compression');
 require('dotenv').config();
 
 // load files
@@ -24,16 +28,45 @@ const root = dev ? `http://localhost:${port}` : process.env.PRODUCTION_URL;
 // setup next server
 server.prepare().then(() => {
 
+// setup production environment conditions
+if (!dev) {
+app.use(helmet());
+app.use(compression());
+app.set('trust proxy', 1);
+sessionConfig.cookie.secure = true;
+}
+
 // setup middleware
+app.use(express.json());
+app.use(morgan('dev', { skip: request => request.url.includes('_next') }));
+app.use(validator());
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// setup custom middleware
+app.use((request, response, next) => { response.locals.user = request.user || null; next(); });
+
+// setup routes
+//app.use('/api/users', userRouter);
+//app.use('/api/session', sessionRouter);
+//app.use('/api/emails', emailRouter);
+
+// setup custom routes
+app.get('/dashboard/user/:id', (request, response) => {
+return server.render(request, response, '/dashboard', { id: request.params.id });
+});
+
+app.get('/settings/user/:id', (request, response) => {
+return server.render(request, response, '/settings', { id: request.params.id });
+});
+
 // let next handle all next related files and events
 app.get('/_next/*', (request, response) => { handle(request, response) });
 app.get('/static/', (request, response) => { handle(request, response) });
+app.get('*', (request, response) => { handle(request, response) });
 
-// error handler middleware
+// setup error handler middleware
 app.use((error, request, response, next) => { const { status = 500, message } = request; response.status(status).json(message); });
 
 // set up port to listen on
