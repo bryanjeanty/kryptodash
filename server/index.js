@@ -1,7 +1,14 @@
-// import npm packages
+// load npm packages
 const express = require('express');
 const next = require('next');
+const mongoose = require('mongoose');
 require('dotenv').config();
+
+// load files
+const { mongooseConfig } = require('./config/mongoose-config.js');
+
+// connect to database
+mongoose.connect(process.env.MONGO_URI, mongooseConfig).then(() => console.log('db connected')).catch(error => console.log(`db connection error: ${error.message}`));
 
 // initial variables
 const app = express();
