@@ -32,7 +32,10 @@ export class UserEditForm extends Component {
       const { id, firstName, email, bio } = this.state;
       const updatedUser = { firstName, email, bio };
       console.log(updatedUser);
-      const { data } = await axios.put(`/api/users/${id}`, updatedUser);
+      const { data } = await axios.put(
+        `http://localhost:3000/api/users/${id}`,
+        updatedUser
+      );
 
       if (data) {
         console.log(data);
@@ -53,6 +56,30 @@ export class UserEditForm extends Component {
     } catch (error) {
       console.error("Update User Error", error);
       this.setState({ message: error.message });
+    }
+  };
+
+  deleteUser = async () => {
+    const destroy = confirm("Are you sure?");
+    if (destroy) {
+      try {
+        const { id } = this.state;
+        const { message } = await axios.delete(
+          `http://localhost:3000/api/users/${id}`
+        );
+        if (message) {
+          this.setState({ message });
+          localStorage.clear();
+          Router.replace("/");
+        }
+      } catch (error) {
+        if (error) {
+          console.error("Delete User Error", error);
+          this.setState({ message: error.message });
+        }
+      }
+    } else {
+      this.setState({ message: "Woah! That was a close one!" });
     }
   };
 
@@ -91,6 +118,7 @@ export class UserEditForm extends Component {
             onClick={this.updateUser}
           />
         </form>
+        <button onClick={this.deleteUser}>Delete</button>
         <p>{message}</p>
       </div>
     );

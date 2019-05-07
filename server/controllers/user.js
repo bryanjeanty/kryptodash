@@ -154,7 +154,7 @@ const deleteUser = async (request, response) => {
       response.status(400).json({ message: "This user could not be found" });
     }
   });
-
+  response.clearCookie("krypto-connect.sid");
   response.json({ message: "User successfully deleted" });
 };
 
