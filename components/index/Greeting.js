@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 
 export class Greeting extends Component {
   constructor(props) {
@@ -17,7 +18,12 @@ export class Greeting extends Component {
     }
 
     return sessionName ? (
-      <h4>Hello, {sessionName}!</h4>
+      <h4>
+        Hello,{" "}
+        <Link href="/dashboard">
+          <a>{sessionName}!</a>
+        </Link>
+      </h4>
     ) : (
       <h4>Hello, Guest!</h4>
     );

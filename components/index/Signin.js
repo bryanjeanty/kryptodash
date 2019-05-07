@@ -27,7 +27,7 @@ export class Signin extends Component {
         this.setState({ message: data.message, email: "", password: "" });
         const userDataString = `${data.id}%${data.firstName}%${data.email}%${
           data.avatar
-        }%${data.bio}`;
+        }%${data.coins}`;
         localStorage.setItem("userData", userDataString);
       }
     } catch (error) {
@@ -38,7 +38,7 @@ export class Signin extends Component {
     }
     setTimeout(() => {
       location.reload();
-    }, 1000);
+    }, 500);
   };
 
   render() {
