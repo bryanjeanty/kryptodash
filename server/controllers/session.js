@@ -15,11 +15,7 @@ const startSession = (request, response) => {
         return response.status(500).json(error.message);
       }
       const userData = {
-        id: user._id,
-        firstName: user.firstName,
-        email: user.email,
-        avatar: user.avatar,
-        coins: user.coins,
+        user,
         message: "Session started"
       };
       response.json(userData);

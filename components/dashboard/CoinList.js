@@ -16,7 +16,7 @@ export class CoinList extends Component {
     const { session } = this.props;
     if (typeof session === "object") {
       this.setState({
-        coinIds: session.coins || session.userDataString.split("%")[5]
+        coinIds: session.coins || session.userDataString.split("%")[4]
       });
     }
   };

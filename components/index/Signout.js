@@ -17,6 +17,9 @@ export class Signout extends Component {
         console.log(data);
         this.setState({ message: data.message });
         localStorage.clear();
+        setTimeout(() => {
+          location.reload();
+        }, 500);
       }
     } catch (error) {
       if (error) {
@@ -24,9 +27,6 @@ export class Signout extends Component {
         this.setState({ message: error.message });
       }
     }
-    setTimeout(() => {
-      location.reload();
-    }, 500);
   };
 
   render() {

@@ -37,6 +37,9 @@ class Dashboard extends Component {
         <Link href="/">
           <a>Home</a>
         </Link>
+        <Link href="/settings">
+          <a>Settings</a>
+        </Link>
         <UserProfile session={session} />
         <CoinList session={session} />
       </Fragment>

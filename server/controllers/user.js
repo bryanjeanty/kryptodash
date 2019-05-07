@@ -62,9 +62,7 @@ const signupNewUser = async (request, response) => {
 
     // send specific data we want
     const userData = {
-      id: user._id,
-      firstName: user.firstName,
-      email: user.email,
+      user,
       message: "Successfully registered new user!"
     };
 
@@ -99,8 +97,13 @@ const getUser = async (request, response) => {
         .json({ message: "This user could not be found!" });
     }
 
+    const userData = {
+      user,
+      message: "User found!"
+    };
+
     // respond with specific user
-    response.json(user);
+    response.json(userData);
   });
 };
 
@@ -110,8 +113,8 @@ const updateUser = async (request, response) => {
   const { id } = request.params;
 
   // get fields from request body
-  const { firstName, lastName, email, password } = request.body;
-  const fields = { firstName, lastName, email, password };
+  const { firstName, bio, email, password } = request.body;
+  const fields = { firstName, bio, email, password };
 
   // set update options
   const options = { new: true };

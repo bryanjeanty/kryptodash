@@ -24,11 +24,15 @@ export class Signin extends Component {
       );
       if (data) {
         console.log(data);
+        const { user } = data;
         this.setState({ message: data.message, email: "", password: "" });
-        const userDataString = `${data.id}%${data.firstName}%${data.email}%${
-          data.avatar
-        }%${data.coins}`;
+        const userDataString = `${user._id}%${user.firstName}%${user.email}%${
+          user.avatar
+        }%${user.coins}%${user.bio}`;
         localStorage.setItem("userData", userDataString);
+        setTimeout(() => {
+          location.reload();
+        }, 500);
       }
     } catch (error) {
       if (error) {
@@ -36,9 +40,6 @@ export class Signin extends Component {
         this.setState({ message: error.message, password: "" });
       }
     }
-    setTimeout(() => {
-      location.reload();
-    }, 500);
   };
 
   render() {

@@ -31,7 +31,11 @@ const userSchema = new mongoose.Schema(
       default: "/static/images/pro-pic.png",
       required: "Avatar is required"
     },
-    bio: { type: String, trim: true },
+    bio: {
+      type: String,
+      default: "Happy new user and cryptocurrency enthusiast!",
+      required: true
+    },
     coins: [{ type: ObjectId }]
   },
   { timestamps: true }
