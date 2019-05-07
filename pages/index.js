@@ -1,41 +1,45 @@
-// imports
-import React, { Component } from "react";
-import { axiosCMC } from "../api/axios";
-
-// cmc api
-const cryptosEndpoint = "/v1/cryptocurrency/listings/latest";
-const cryptosQuery = "?limit=20";
+import React, { Component, Fragment } from "react";
+import { Header } from "../components/index/Header";
+import { Signup } from "../components/index/Signup";
+import { Signin } from "../components/index/Signin";
+import { Greeting } from "../components/index/Greeting";
+import { Signout } from "../components/index/Signout";
 
 class Index extends Component {
-  state = {
-    cryptoList: []
-  };
-
-  getCryptos = async () => {
-    try {
-      const response = await axiosCMC(cryptosEndpoint, cryptosQuery);
-      this.setState({ cryptoList: response.data });
-    } catch (error) {
-      console.log(error);
+  static getInitialProps(ctx) {
+    let userData;
+    if (typeof window !== "undefined") {
+      userData = localStorage.getItem("userData");
+    } else {
+      if (ctx.req) {
+        userData = ctx.req.user;
+      }
     }
+    return { userData };
+  }
+
+  state = {
+    session: this.props.userData
   };
 
   render() {
-    const { cryptoList } = this.state;
+    const { session } = this.state;
 
     return (
-      <div>
-        <button onClick={this.getCryptos}>Get Cryptos</button>
-        {cryptoList ? (
-          <ul>
-            {cryptoList.map(crypto => (
-              <li key={crypto.id}>{crypto.name}</li>
-            ))}
-          </ul>
+      <Fragment>
+        <Header />
+        {session ? (
+          <div>
+            <Greeting />
+            <Signout />
+          </div>
         ) : (
-          <ul>No Data</ul>
+          <div>
+            <Signup />
+            <Signin />
+          </div>
         )}
-      </div>
+      </Fragment>
     );
   }
 }

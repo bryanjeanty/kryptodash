@@ -3,10 +3,10 @@ import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 const { CMC_KEY } = publicRuntimeConfig;
+const proxyUrl = "https://damp-cove-73616.herokuapp.com/";
+const cmcUrl = "https://pro-api.coinmarketcap.com";
 
 export const axiosCMC = async (endpoint, query) => {
-  const proxyUrl = "https://damp-cove-73616.herokuapp.com/";
-  const cmcUrl = "https://pro-api.coinmarketcap.com";
   const axiosConfig = {
     baseURL: proxyUrl + cmcUrl,
     withCredentials: false,
