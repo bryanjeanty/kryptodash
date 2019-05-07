@@ -2,11 +2,14 @@
 const { Router } = require("express");
 
 // load controllers
-// const { checkSession } = require("../controllers/session");
+const { checkSession } = require("../controllers/session");
 const {
   validateNewUser,
   signupNewUser,
-  getAllUsers
+  getAllUsers,
+  getUser,
+  updateUser,
+  deleteUser
 } = require("../controllers/user");
 
 // load route error catcher
@@ -19,6 +22,13 @@ router = new Router();
 // endpoint: '/api/users'
 router.post("/signup", validateNewUser, signupNewUser);
 router.get("/", catchErrors(getAllUsers));
+
+// endpoint: '/api/users/:id'
+router
+  .route("/:id")
+  .get(catchErrors(getUser))
+  .put(catchErrors(updateUser))
+  .delete(catchErrors(deleteUser));
 
 // export
 module.exports = router;

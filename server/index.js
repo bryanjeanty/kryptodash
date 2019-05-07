@@ -2,6 +2,7 @@
 const express = require("express");
 const session = require("express-session");
 const next = require("next");
+const mongoose = require("mongoose");
 const validator = require("express-validator");
 const morgan = require("morgan");
 const helmet = require("helmet");

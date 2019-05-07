@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 // validate signup form
-module.exports = validateNewUser = (request, response, next) => {
+const validateNewUser = (request, response, next) => {
   // sanitize signup fields (first name, last name, email, password)
   request.sanitizeBody("firstName");
   request.sanitizeBody("lastName");
@@ -17,11 +17,11 @@ module.exports = validateNewUser = (request, response, next) => {
     .isLength({ min: 3 });
 
   // last name field
-  request.checkBody("lastName", "Enter your first name").notEmpty();
+  request.checkBody("lastName", "Enter your last name").notEmpty();
 
   request
-    .checkBody("lastName", "Last name must be atleast one character long")
-    .isLength({ min: 1 });
+    .checkBody("lastName", "Last name must be atleast two character long")
+    .isLength({ min: 2 });
 
   // email field
   request
@@ -48,30 +48,118 @@ module.exports = validateNewUser = (request, response, next) => {
 };
 
 // create user
-module.exports = signupNewUser = async (request, response) => {
+const signupNewUser = async (request, response) => {
   const { firstName, lastName, email, password } = request.body;
 
-  const user = await new User({ firstName, lastName, email, password });
-  await User.register(user, password, (error, user) => {
+  const newUser = await new User({ firstName, lastName, email, password });
+  await User.register(newUser, password, (error, user) => {
+    if (!user) {
+      return response.status(400).json({ message: "User is undefined" });
+    }
     if (error) {
-      return response.status(500).send(error.message);
+      return response.status(500).json(error.message);
     }
 
+    // send specific data we want
     const userData = {
+      id: user._id,
       firstName: user.firstName,
       email: user.email,
       message: "Successfully registered new user!"
     };
 
+    // respond with user data in json format
     response.json(userData);
   });
 };
 
 // get all users in database
-module.exports = getAllUsers = async (request, response) => {
+const getAllUsers = async (request, response) => {
   const users = await User.find().select(
     "_id firstName email createdAt updatedAt"
   );
 
+  // respond with all users in json format
   response.json(users);
+};
+
+// get a single user in database
+const getUser = async (request, response) => {
+  // get user id from query parameter
+  const { id } = request.params;
+
+  // find user by id and perform error handling
+  await User.findById(id, (error, user) => {
+    if (error) {
+      return response.status(500).json(error.message);
+    }
+    if (!user) {
+      return response
+        .status(400)
+        .json({ message: "This user could not be found!" });
+    }
+
+    // respond with specific user
+    response.json(user);
+  });
+};
+
+// update a single user in the database
+const updateUser = async (request, response) => {
+  // get user id from query parameter
+  const { id } = request.params;
+
+  // get fields from request body
+  const { firstName, lastName, email, password } = request.body;
+  const fields = { firstName, lastName, email, password };
+
+  // set update options
+  const options = { new: true };
+
+  // find user and update fields
+  const user = await User.findByIdAndUpdate(
+    id,
+    fields,
+    options,
+    (error, user) => {
+      if (error) {
+        response.status(500).json(error.message);
+      }
+      if (!user) {
+        response.status(400).json({ message: "This user could not be found" });
+      }
+    }
+  );
+
+  const userData = { user, message: "User successfully updated!" };
+
+  // respond with the updated user
+  response.json(userData);
+};
+
+// delete a single user in the database
+const deleteUser = async (request, response) => {
+  // get user id from query parameter
+  const { id } = request.params;
+
+  //find and delete user
+  await User.findByIdAndDelete(id, (error, user) => {
+    if (error) {
+      response.status(500).json(error.message);
+    }
+    if (!user) {
+      response.status(400).json({ message: "This user could not be found" });
+    }
+  });
+
+  response.json({ message: "User successfully deleted" });
+};
+
+module.exports = {
+  validateNewUser,
+  signupNewUser,
+  getAllUsers,
+  getUser,
+  updateUser,
+  deleteUser
 };
