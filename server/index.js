@@ -15,6 +15,7 @@ const { passport } = require("./config/passport-config.js");
 
 // load routers
 const userRouter = require("./routes/user");
+const sessionRouter = require("./routes/session");
 
 // connect to database
 mongoose
@@ -56,7 +57,7 @@ server.prepare().then(() => {
 
   // setup routes
   app.use("/api/users", userRouter);
-  //app.use('/api/session', sessionRouter);
+  app.use("/api/session", sessionRouter);
   //app.use('/api/emails', emailRouter);
 
   // setup custom routes
