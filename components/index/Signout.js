@@ -26,7 +26,7 @@ export class Signout extends Component {
     }
     setTimeout(() => {
       location.reload();
-    }, 2000);
+    }, 1000);
   };
 
   render() {

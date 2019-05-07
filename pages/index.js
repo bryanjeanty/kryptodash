@@ -9,7 +9,7 @@ class Index extends Component {
   static getInitialProps(ctx) {
     let userData;
     if (typeof window !== "undefined") {
-      userData = localStorage.getItem("userData");
+      userData = { userDataString: localStorage.getItem("userData") };
     } else {
       if (ctx.req) {
         userData = ctx.req.user;
@@ -19,7 +19,7 @@ class Index extends Component {
   }
 
   state = {
-    session: this.props.userData
+    session: this.props.userData || ""
   };
 
   render() {
@@ -28,9 +28,9 @@ class Index extends Component {
     return (
       <Fragment>
         <Header />
+        <Greeting session={session} />
         {session ? (
           <div>
-            <Greeting />
             <Signout />
           </div>
         ) : (

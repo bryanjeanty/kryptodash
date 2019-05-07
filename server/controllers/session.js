@@ -18,6 +18,8 @@ const startSession = (request, response) => {
         id: user._id,
         firstName: user.firstName,
         email: user.email,
+        avatar: user.avatar,
+        bio: user.bio,
         message: "Session started"
       };
       response.json(userData);
