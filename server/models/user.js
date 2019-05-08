@@ -1,6 +1,5 @@
 // load npm packages
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema;
 const mongodbErrorHandler = require("mongoose-mongodb-errors");
 const passportLocalMongoose = require("passport-local-mongoose");
 
@@ -36,7 +35,7 @@ const userSchema = new mongoose.Schema(
       default: "Happy new user and cryptocurrency enthusiast!",
       required: true
     },
-    coins: [{ type: ObjectId }]
+    coins: [{ type: Number }]
   },
   { timestamps: true }
 );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { axiosCMC } from "../api/axios";
 import fuzzy from "fuzzy";
+import axios from "axios";
 
 export class Results extends Component {
   constructor(props) {
@@ -71,6 +72,55 @@ export class Results extends Component {
     this.setState({ matches });
   };
 
+  updateCoins = async id => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      const userId = userData.split("%")[0];
+      let coins = userData.split("%")[4];
+      if (coins.length === 0) {
+        coins = [id];
+      } else {
+        coins = coins + `#${id}`;
+        coins = coins.split("#");
+        coins = coins.filter(
+          (coin, index, self) => self.indexOf(coin) >= index
+        );
+      }
+      try {
+        const coinsObj = { coins };
+        console.log(coinsObj);
+        const { data } = await axios.put(
+          `http://localhost:3000/api/users/${userId}`,
+          coinsObj
+        );
+        if (data) {
+          console.log(data);
+          const { user } = data;
+          localStorage.removeItem("userData");
+          let userDataString;
+          if (user.coins.length !== 0) {
+            const coinString = user.coins.join("#");
+            userDataString = `${user._id}%${user.firstName}%${user.email}%${
+              user.avatar
+            }%${coinString}%${user.bio}`;
+          } else {
+            userDataString = `${user._id}%${user.firstName}%${user.email}%${
+              user.avatar
+            }%%${user.bio}`;
+          }
+          localStorage.setItem("userData", userDataString);
+        }
+      } catch (error) {
+        if (error) {
+          console.error("Coin Update Error", error);
+          alert(error.message);
+        }
+      }
+    } else {
+      alert("Must Have An Account In Order To Add To Favorites!!");
+    }
+  };
+
   render() {
     const { cryptoList, isLoading, page, offset, search, matches } = this.state;
     const isDisabled = page === 1;
@@ -110,6 +160,7 @@ export class Results extends Component {
               <th>Percent Change 1hr</th>
               <th>Circulating Supply</th>
               <th>Volume 24hr</th>
+              <th>Add/Remove</th>
             </tr>
           </thead>
           {matches.length !== 0 ? (
@@ -125,6 +176,14 @@ export class Results extends Component {
                     <td>{match.quote.USD.percent_change_1h}</td>
                     <td>{match.circulating_supply}</td>
                     <td>{match.quote.USD.volume_24h}</td>
+                    <td>
+                      <input
+                        type="button"
+                        name="add-remove"
+                        value="click"
+                        onClick={() => this.updateCoins(match.id)}
+                      />
+                    </td>
                   </tr>
                 );
               })}
@@ -142,6 +201,14 @@ export class Results extends Component {
                     <td>{crypto.quote.USD.percent_change_1h}</td>
                     <td>{crypto.circulating_supply}</td>
                     <td>{crypto.quote.USD.volume_24h}</td>
+                    <td>
+                      <input
+                        type="button"
+                        name="add-remove"
+                        value="click"
+                        onClick={() => this.updateCoins(crypto.id)}
+                      />
+                    </td>
                   </tr>
                 );
               })}

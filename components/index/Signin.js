@@ -26,9 +26,17 @@ export class Signin extends Component {
         console.log(data);
         const { user } = data;
         this.setState({ message: data.message, email: "", password: "" });
-        const userDataString = `${user._id}%${user.firstName}%${user.email}%${
-          user.avatar
-        }%${user.coins}%${user.bio}`;
+        let userDataString;
+        if (user.coins.length !== 0) {
+          const coinString = user.coins.join("#");
+          userDataString = `${user._id}%${user.firstName}%${user.email}%${
+            user.avatar
+          }%${coinString}%${user.bio}`;
+        } else {
+          userDataString = `${user._id}%${user.firstName}%${user.email}%${
+            user.avatar
+          }%%${user.bio}`;
+        }
         localStorage.setItem("userData", userDataString);
         setTimeout(() => {
           location.reload();

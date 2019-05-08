@@ -113,8 +113,15 @@ const updateUser = async (request, response) => {
   const { id } = request.params;
 
   // get fields from request body
-  const { firstName, bio, email, password } = request.body;
-  const fields = { firstName, bio, email, password };
+  const { firstName, bio, email, password, avatar, coins } = request.body;
+
+  const fields = { firstName, bio, email, password, avatar, coins };
+
+  Object.keys(fields).forEach(key => {
+    if (typeof fields[key] === "undefined") {
+      delete fields[key];
+    }
+  });
 
   // set update options
   const options = { new: true };
