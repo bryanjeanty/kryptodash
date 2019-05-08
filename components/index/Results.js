@@ -57,8 +57,9 @@ export class Results extends Component {
     }
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = async event => {
+    await this.setState({ [event.target.name]: event.target.value });
+    this.searchCryptos(event);
   };
 
   searchCryptos = event => {
@@ -85,12 +86,6 @@ export class Results extends Component {
             placeholder="Search cryptos..."
             value={search}
             onChange={this.handleChange}
-          />
-          <input
-            name="searchButton"
-            type="submit"
-            value="Search"
-            onClick={this.searchCryptos}
           />
         </form>
         <input
