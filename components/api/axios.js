@@ -20,7 +20,7 @@ export const axiosCMC = async (endpoint, query) => {
     console.log(data);
     return data;
   } catch (error) {
-    console.error("CMC fetch error", error);
+    console.error("CMC Fetch Error", error);
     return {};
   }
 };

@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { Header } from "../components/index/Header";
+import { Brand } from "../components/index/Brand";
 import { Signup } from "../components/index/Signup";
 import { Signin } from "../components/index/Signin";
 import { Greeting } from "../components/index/Greeting";
 import { Signout } from "../components/index/Signout";
+import { Results } from "../components/index/Results";
 
 class Index extends Component {
   static getInitialProps(ctx) {
@@ -27,7 +28,7 @@ class Index extends Component {
 
     return (
       <Fragment>
-        <Header />
+        <Brand />
         <Greeting session={session} />
         {session ? (
           <div>
@@ -39,6 +40,7 @@ class Index extends Component {
             <Signin />
           </div>
         )}
+        <Results />
       </Fragment>
     );
   }
