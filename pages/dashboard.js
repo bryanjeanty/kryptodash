@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Router from "next/router";
 import Link from "next/link";
+import { withRouter } from "next/router";
 import { UserProfile } from "../components/dashboard/UserProfile";
 import { CoinList } from "../components/dashboard/CoinList";
 
@@ -47,4 +48,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { withRouter } from "next/router";
 import { Brand } from "../components/index/Brand";
 import { Signup } from "../components/index/Signup";
 import { Signin } from "../components/index/Signin";
@@ -46,4 +47,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default withRouter(Index);

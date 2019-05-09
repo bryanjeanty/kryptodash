@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { withRouter } from "next/router";
 import { UserEditForm } from "../components/settings/UserEditForm";
 
 class Settings extends Component {
@@ -34,4 +35,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default withRouter(Settings);

@@ -72,7 +72,7 @@ export class Results extends Component {
     this.setState({ matches });
   };
 
-  updateCoins = async id => {
+  addCoins = async id => {
     const userData = localStorage.getItem("userData");
     if (userData) {
       const userId = userData.split("%")[0];
@@ -160,7 +160,7 @@ export class Results extends Component {
               <th>Percent Change 1hr</th>
               <th>Circulating Supply</th>
               <th>Volume 24hr</th>
-              <th>Add/Remove</th>
+              <th>Add</th>
             </tr>
           </thead>
           {matches.length !== 0 ? (
@@ -179,9 +179,9 @@ export class Results extends Component {
                     <td>
                       <input
                         type="button"
-                        name="add-remove"
-                        value="click"
-                        onClick={() => this.updateCoins(match.id)}
+                        name="add"
+                        value="Add"
+                        onClick={() => this.addCoins(match.id)}
                       />
                     </td>
                   </tr>
@@ -204,9 +204,9 @@ export class Results extends Component {
                     <td>
                       <input
                         type="button"
-                        name="add-remove"
-                        value="click"
-                        onClick={() => this.updateCoins(crypto.id)}
+                        name="add"
+                        value="Add"
+                        onClick={() => this.addCoins(crypto.id)}
                       />
                     </td>
                   </tr>
