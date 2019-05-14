@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "next/router";
-import { Brand } from "../components/index/Brand";
-import { Signup } from "../components/index/Signup";
-import { Signin } from "../components/index/Signin";
-import { Greeting } from "../components/index/Greeting";
-import { Signout } from "../components/index/Signout";
-import { Results } from "../components/index/Results";
+import { Brand } from "../client/components/index/Brand";
+import { Signup } from "../client/components/index/Signup";
+import { Signin } from "../client/components/index/Signin";
+import { Greeting } from "../client/components/index/Greeting";
+import { Signout } from "../client/components/index/Signout";
+import { Results } from "../client/components/index/Results";
 
 class Index extends Component {
   static getInitialProps(ctx) {

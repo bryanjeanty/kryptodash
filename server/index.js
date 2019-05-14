@@ -59,7 +59,6 @@ server.prepare().then(() => {
   // setup routes
   app.use("/api/users", userRouter);
   app.use("/api/session", sessionRouter);
-  //app.use('/api/emails', emailRouter);
 
   // setup custom routes
   app.get("/dashboard/user/:id", (request, response) => {

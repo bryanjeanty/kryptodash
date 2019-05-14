@@ -2,7 +2,6 @@
 const { Router } = require("express");
 
 // load controllers
-const { checkSession } = require("../controllers/session");
 const {
   validateNewUser,
   signupNewUser,

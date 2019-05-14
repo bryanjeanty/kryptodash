@@ -2,8 +2,8 @@ import React, { Component, Fragment } from "react";
 import Router from "next/router";
 import Link from "next/link";
 import { withRouter } from "next/router";
-import { UserProfile } from "../components/dashboard/UserProfile";
-import { CoinList } from "../components/dashboard/CoinList";
+import { UserProfile } from "../client/components/dashboard/UserProfile";
+import { CoinList } from "../client/components/dashboard/CoinList";
 
 class Dashboard extends Component {
   static getInitialProps(ctx) {

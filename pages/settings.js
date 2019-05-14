@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withRouter } from "next/router";
-import { UserEditForm } from "../components/settings/UserEditForm";
+import { UserEditForm } from "../client/components/settings/UserEditForm";
 
 class Settings extends Component {
   static getInitialProps(ctx) {

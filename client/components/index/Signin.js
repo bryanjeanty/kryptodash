@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Router from "next/router";
 
 export class Signin extends Component {
   state = {
