@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import Link from "next/link";
+// IMPORT ENCRYPT/DECRYPT LIBRARY
 
 export class Greeting extends Component {
+  // REMOVE ME
   constructor(props) {
     super(props);
   }
 
   render() {
+    // REMOVE ME
     const { session } = this.props;
 
+    // UPDATE TO GET SESSION FROM ENCRYPTED USER DATA STRING
     let sessionName;
     if (typeof session === "object") {
       const name = session.firstName || session.userDataString.split("%")[1];

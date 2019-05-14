@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+// IMPORT AXIOS USER FUNCTION (method, endpoint, options, payload)
+// IMPORT URLS
 import { axiosCMC } from "../api/axios";
+// REMOVE ME
 import axios from "axios";
+// IMPORT ENCRYPT/DECRYPT LIBRARY
 
 export class CoinList extends Component {
+  // PUT ME IN REDUX STATE
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +23,7 @@ export class CoinList extends Component {
     this.getUserCoins();
   }
 
+  // PUT ME IN FUNCTIONS
   getCryptos = async () => {
     this.setState({ isLoading: true });
     const endpoint = "/v1/cryptocurrency/listings/latest";
@@ -33,6 +39,8 @@ export class CoinList extends Component {
     }
   };
 
+  // PUT ME IN FUNCTIONS
+  // UPDATE TO ONLY INTERACT WITH DATABASE
   getUserCoins = () => {
     this.setState({ isLoading: true });
     const userData = localStorage.getItem("userData");
@@ -50,6 +58,8 @@ export class CoinList extends Component {
     }
   };
 
+  // PUT ME IN FUNCTIONS
+  // UPDATE TO INTERACT ONLY WITH DATABASE
   removeUserCoin = async id => {
     const remove = confirm("Are you sure?");
     if (remove) {
@@ -105,7 +115,7 @@ export class CoinList extends Component {
   render() {
     const { coinIds, coinList, isLoading, message } = this.state;
 
-    return isLoading ? (
+    isLoading ? (
       <div>Loading</div>
     ) : (
       <div>
@@ -149,13 +159,13 @@ export class CoinList extends Component {
               })}
             </tbody>
           ) : (
-            <tbody>
-              <tr>
-                <td colSpan="6">KryptoDash &copy; 2019</td>
-              </tr>
-            </tbody>
+            <tbody />
           )}
-          <tfoot />
+          <tfoot>
+            <tr>
+              <td colSpan="6">KryptoDash &copy; 2019</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     );

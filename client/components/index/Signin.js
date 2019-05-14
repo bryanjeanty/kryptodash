@@ -1,17 +1,23 @@
 import React, { Component } from "react";
+// IMPORT AXIOS SESSION FUNCTION
+// IMPORT URLS
+// REMOVE ME
 import axios from "axios";
 
 export class Signin extends Component {
+  // PUT ME IN REDUX
   state = {
     email: "",
     password: "",
     message: ""
   };
 
+  // PUT ME IN FUNCTIONS
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  // PUT ME IN FUNCTIONS
   handleClick = async event => {
     event.preventDefault();
     try {
@@ -26,6 +32,7 @@ export class Signin extends Component {
         const { user } = data;
         this.setState({ message: data.message, email: "", password: "" });
         let userDataString;
+        // ONLY PUT USER ID, FIRSTNAME AND EMAIL INTO LOCALSTORAGE
         if (user.coins.length !== 0) {
           const coinString = user.coins.join("#");
           userDataString = `${user._id}%${user.firstName}%${user.email}%${
@@ -37,6 +44,7 @@ export class Signin extends Component {
           }%%${user.bio}`;
         }
         localStorage.setItem("userData", userDataString);
+        // DECREASE TIME TO 300 MILLISECONDS
         setTimeout(() => {
           location.reload();
         }, 500);

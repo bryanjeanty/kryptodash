@@ -6,6 +6,7 @@ import { UserProfile } from "../client/components/dashboard/UserProfile";
 import { CoinList } from "../client/components/dashboard/CoinList";
 
 class Dashboard extends Component {
+  // PUT BODY IN FUNCTIONS
   static getInitialProps(ctx) {
     let userData;
     if (typeof window !== "undefined") {
@@ -27,11 +28,13 @@ class Dashboard extends Component {
     return { userData };
   }
 
+  // REMOVE -- NO LONGER USEFUL
   state = {
     session: this.props.userData || ""
   };
 
   render() {
+    // REMOVE -- NO LONGER USEFUL
     const { session } = this.state;
     return (
       <Fragment>
@@ -41,6 +44,7 @@ class Dashboard extends Component {
         <Link href="/settings">
           <a>Settings</a>
         </Link>
+        {/* REMOVE SESSION PROP/VARIABLE */}
         <UserProfile session={session} />
         <CoinList session={session} />
       </Fragment>

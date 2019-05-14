@@ -1,9 +1,14 @@
+// RENAME FILE TO RESULTS LIST
 import React, { Component } from "react";
+// IMPORT AXIOS SERVER FUNCTION
 import { axiosCMC } from "../api/axios";
 import fuzzy from "fuzzy";
+// REMOVE ME
 import axios from "axios";
 
 export class Results extends Component {
+  // PUT ME IN REDUX STATE
+  // ADD DISABLE STATE FOR ADD BUTTON
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +26,7 @@ export class Results extends Component {
     this.getCryptos(this.state.offset);
   }
 
+  // PUT ME IN FUNCTIONS
   decrement = async event => {
     event.preventDefault();
     await this.setState({
@@ -31,6 +37,7 @@ export class Results extends Component {
     this.searchCryptos(event);
   };
 
+  // PUT ME IN FUNCTIONS
   increment = async event => {
     event.preventDefault();
     await this.setState({
@@ -41,6 +48,7 @@ export class Results extends Component {
     this.searchCryptos(event);
   };
 
+  // PUT ME IN FUNCTIONS
   getCryptos = async offset => {
     this.setState({ isLoading: true });
     const endpoint = "/v1/cryptocurrency/listings/latest";
@@ -58,11 +66,13 @@ export class Results extends Component {
     }
   };
 
+  // PUT ME IN FUNCTIONS
   handleChange = async event => {
     await this.setState({ [event.target.name]: event.target.value });
     this.searchCryptos(event);
   };
 
+  // PUT ME IN FUNCTIONS
   searchCryptos = event => {
     event.preventDefault();
     const { cryptoList, search } = this.state;
@@ -72,6 +82,9 @@ export class Results extends Component {
     this.setState({ matches });
   };
 
+  // PUT ME IN FUNCTIONS
+  // UPDATE TO ONLY INTERACT WITH DATABASE
+  // UPDATE SUCH THAT IF A COIN ID FROM THE API MATCHES A COIN ID FROM THE USER'S COINS LIST, THE ADD BUTTON IS DISABLED
   addCoins = async id => {
     const userData = localStorage.getItem("userData");
     if (userData) {
@@ -129,6 +142,7 @@ export class Results extends Component {
       <div>Loading...</div>
     ) : (
       <div>
+        {/* PUT SEARCH BAR IN ITS OWN COMPONENT FILE */}
         <form>
           <input
             name="search"
@@ -138,6 +152,9 @@ export class Results extends Component {
             onChange={this.handleChange}
           />
         </form>
+        {/* END OF SEARCH BAR */}
+
+        {/* PUT PAGINATION IN ITS OWN COMPONENT FILE */}
         <input
           type="button"
           disabled={isDisabled}
@@ -146,6 +163,7 @@ export class Results extends Component {
         />
         <input type="button" onClick={this.increment} value="Next" />
         <div>Page #: {page}</div>
+        {/* END OF PAGINATION */}
         <table>
           <thead>
             <tr>

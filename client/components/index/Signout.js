@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+// IMPORT AXIOS SESSION FUNCTION
+// IMPORT URLS
+// REMOVE ME
 import axios from "axios";
 
 export class Signout extends Component {
@@ -6,6 +9,7 @@ export class Signout extends Component {
     message: ""
   };
 
+  // PUT ME IN FUNCTIONS
   handleClick = async event => {
     event.preventDefault();
     try {

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+// IMPORT AXIOS USER FUNCTION
+// IMPORT URLS
+// REMOVE ME
 import axios from "axios";
 
 export class Signup extends Component {
+  // PUT ME IN REDUX
   state = {
     firstName: "",
     lastName: "",
@@ -10,10 +14,12 @@ export class Signup extends Component {
     message: ""
   };
 
+  // PUT ME IN FUNCTIONS
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  // PUT ME IN FUNCTIONS
   handleClick = async event => {
     event.preventDefault();
     const { firstName, lastName, email, password } = this.state;

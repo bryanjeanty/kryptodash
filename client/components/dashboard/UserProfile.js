@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+// IMPORT ENCRYPTION/DECRYPTION LIBRARY
 
 export class UserProfile extends Component {
+  // REMOVE ME
   constructor(props) {
     super(props);
   }
 
   render() {
+    // REMOVE ME
     const { session } = this.props;
 
+    // UPDATE TO GET SESSION DIRECTLY FROM ENCRYPTED LOCAL STORAGE USER DATA STRING
     let name, email, avatar, bio;
     if (typeof session === "object") {
       name = session.firstName || session.userDataString.split("%")[1];

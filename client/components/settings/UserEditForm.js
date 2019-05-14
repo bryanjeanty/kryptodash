@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+// IMPORT AXIOS USER FUNCTION
+// IMPORT URLS
+// REMOVE ME
 import axios from "axios";
 import Router from "next/router";
 
 export class UserEditForm extends Component {
+  // PUT ME IN REDUX
   constructor(props) {
     super(props);
+    // REMOVE -- CHECK SESSION FROM ENCRYPTED USER DATA STRING IN LOCALSTORAGE
+    // GET USER DATA FROM DATABASE
     const { session } = this.props;
     let sessionId, sessionName, sessionEmail, sessionBio;
     if (typeof session === "object") {
@@ -22,10 +28,12 @@ export class UserEditForm extends Component {
     };
   }
 
+  // PUT ME IN FUNCTIONS
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  // PUT ME IN FUNCTIONS
   updateUser = async event => {
     event.preventDefault();
     try {
@@ -59,6 +67,7 @@ export class UserEditForm extends Component {
     }
   };
 
+  // PUT ME IN FUNCTION
   deleteUser = async () => {
     const destroy = confirm("Are you sure?");
     if (destroy) {
