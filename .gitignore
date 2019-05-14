@@ -2,3 +2,5 @@ node_modules
 .next
 package-lock.json
 .env
+static/images/signup_files
+static/images/signup.html
