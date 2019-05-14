@@ -2,7 +2,15 @@
 const { Router } = require("express");
 
 // load controllers
-const { startSession, endSession } = require("../controllers/session");
+const {
+  startSession,
+  endSession,
+  checkSession
+} = require("../controllers/session");
+const { getUser, updateUser, deleteUser } = require("../controllers/user");
+
+// load route error catcher
+const catchErrors = require("./catchErrors");
 
 // express router instance
 router = new Router();
@@ -11,6 +19,13 @@ router = new Router();
 // Endpoint: '/api/session'
 router.post("/signin", startSession);
 router.get("/signout", endSession);
+
+// Endpoint: '/api/session/users'
+router
+  .route("/:id")
+  .get(checkSession, catchErrors(getUser))
+  .put(checkSession, catchErrors(updateUser))
+  .delete(checkSession, catchErrors(deleteUser));
 
 // export
 module.exports = router;

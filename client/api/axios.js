@@ -1,32 +1,62 @@
-// IMPORT URLS
 import axios from "axios";
-// PUT API KEYS FROM NEXT CONFIG IN SEPARATE FILE
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
-const { CMC_KEY } = publicRuntimeConfig;
+import {
+  proxyEndpoint,
+  cmcHost,
+  serverHost,
+  apiUsers,
+  apiSession
+} from "./url";
+import { CMC_KEY } from "./env";
 
-const proxyUrl = "https://damp-cove-73616.herokuapp.com/";
-const cmcUrl = "https://pro-api.coinmarketcap.com";
+export const axiosCMC = async (path, query) => {
+  const axiosOpts = {
+    method: "get",
+    url: proxyEndpoint + cmcHost + path + query,
+    withCredentials: false,
+    headers: {
+      "X-CMC_PRO_API_KEY": CMC_KEY
+    }
+  };
 
-// PUT THIS BACK IN THE FUNCTION
-const axiosConfig = {
-  baseURL: proxyUrl + cmcUrl,
-  withCredentials: false,
-  headers: {
-    "X-CMC_PRO_API_KEY": CMC_KEY
-  }
-};
-
-export const axiosCMC = async (endpoint, query) => {
   try {
-    const { data } = await axios.get(endpoint + query, axiosConfig);
-    return data;
+    const { data } = await axios(axiosOpts);
+    return { data };
   } catch (error) {
-    console.error("CMC Fetch Error", error);
-    return {};
+    console.error("API FETCH ERROR", error);
+    return;
   }
 };
 
-// CREATE AXIOS USER FUNCTION
+export const axiosUser = async (method, path, payload = {}) => {
+  const axiosOpts = {
+    method,
+    url: serverHost + apiUsers + path,
+    withCredentials: false,
+    data: payload ? payload : {}
+  };
 
-// CREATE AXIOS SESSION FUNCTION
+  try {
+    const { data } = await axios(axiosOpts);
+    return { data };
+  } catch (error) {
+    console.error("USER FETCH ERROR", error);
+    return;
+  }
+};
+
+export const axiosSession = async (method, path, payload = {}) => {
+  const axiosOpts = {
+    method,
+    url: serverHost + apiSession + path,
+    withCredentials: true,
+    data: payload ? payload : {}
+  };
+
+  try {
+    const { data } = await axios(axiosOpts);
+    return { data };
+  } catch (error) {
+    console.error("SESSION FETCH ERROR", error);
+    return;
+  }
+};
