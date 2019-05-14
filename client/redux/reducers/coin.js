@@ -1,5 +1,5 @@
-import { coinTypes } from "../actions/types/coins";
-import { coinState } from "../state/coins";
+import { coinTypes } from "../actions/types/coin";
+import { coinState } from "../state/coin";
 
 export const coinReducer = (state = coinState, action) => {
   switch (action.type) {

@@ -1,5 +1,5 @@
-import { cmcLatestPath, cmcLimitQuery } from "../../api/url";
-import { axiosCMC, axiosSession } from "../../api/axios";
+import { cmcLatestPath, cmcLimitQuery } from "../api/url";
+import { axiosCMC, axiosSession } from "../api/axios";
 
 export const getCMCCoins = async () => {
   const { data } = await axiosCMC(cmcLatestPath, cmcLimitQuery);
@@ -10,7 +10,7 @@ export const getCMCCoins = async () => {
   }
 };
 
-export const getUserCoins = async () => {
+export const getUser = async () => {
   const userData = localStorage.getItem("userData");
   let userId;
   if (userData) {

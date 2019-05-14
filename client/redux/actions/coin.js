@@ -1,9 +1,9 @@
-import { coinTypes } from "./types/coins";
+import { coinTypes } from "./types/coin";
 import {
   getCMCCoins,
-  getUserCoins,
+  getUser,
   removeUserCoin
-} from "../../functions/dashboard/coinList";
+} from "../../functions/dashboard";
 
 export const requestCMCCoins = () => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
@@ -23,7 +23,7 @@ export const requestCMCCoins = () => async dispatch => {
 
 export const requestUserCoins = () => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const { data } = await getUserCoins();
+  const { data } = await getUser();
   if (data) {
     return dispatch({
       type: coinTypes.GET_USER_COINS_SUCCESS,

@@ -1,3 +1,4 @@
-import { coinState } from "./coins";
+import { coinState } from "./coin";
+import { userState } from "./user";
 
-export default { coin: coinState };
+export default { coin: coinState, user: userState };
