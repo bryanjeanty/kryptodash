@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// IMPORT AXIOS USER FUNCTION
-// IMPORT URLS
-// REMOVE ME
-import axios from "axios";
+import { connect } from "react-redux";
+import { signup, signin } from "../../redux/actions/user";
+import Router, { withRouter } from "next/router";
 
-export class Signup extends Component {
-  // PUT ME IN REDUX
+class Signup extends Component {
   state = {
     firstName: "",
     lastName: "",
@@ -14,36 +12,24 @@ export class Signup extends Component {
     message: ""
   };
 
-  // PUT ME IN FUNCTIONS
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  // PUT ME IN FUNCTIONS
-  handleClick = async event => {
+  handleSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email, password } = this.state;
     const user = { firstName, lastName, email, password };
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/api/users/signup",
-        user
-      );
-      if (data) {
-        console.log(data);
-        this.setState({
-          message: data.message,
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: ""
-        });
-      }
-    } catch (error) {
-      if (error) {
-        console.log(error);
-        this.setState({ message: error.message, password: "" });
-      }
+    await this.props.signup(user);
+    if (this.props.user) {
+      const { message, email, password } = this.props.user;
+      this.setState({ message });
+      setTimeout(() => {
+        await this.props.signin({ email, password });
+        if (this.props.user.message !== 'Error') {
+          Router.replace('/dashboard');
+        }
+      }, 250);
     }
   };
 
@@ -52,7 +38,8 @@ export class Signup extends Component {
 
     return (
       <div>
-        <form>
+        <p>{message}</p>
+        <form onSubmit={this.handleSubmit}>
           <input
             name="firstName"
             type="text"
@@ -81,15 +68,14 @@ export class Signup extends Component {
             onChange={this.handleChange}
             value={password}
           />
-          <input
-            name="signup"
-            type="submit"
-            value="Signup"
-            onClick={this.handleClick}
-          />
+          <input name="signup" type="submit" value="Signup" />
         </form>
-        <p>{message}</p>
       </div>
     );
   }
 }
+
+export default connect(
+  ({ user }) => ({ user }),
+  { signup, signin }
+)(withRouter(Signup));

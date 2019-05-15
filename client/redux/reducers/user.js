@@ -24,6 +24,78 @@ export const userReducer = (state = userState, action) => {
         isLoading: false,
         message: action.message
       };
+    case userTypes.SIGNIN_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message,
+        name: action.payload.name,
+        email: action.payload.email,
+        avatar: action.payload.avatar,
+        bio: action.payload.bio
+      };
+    case userTypes.SIGNIN_USER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.SIGNUP_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message,
+        name: action.payload.name,
+        email: action.payload.email,
+        avatar: action.payload.avatar,
+        bio: action.payload.bio
+      };
+    case userTypes.SIGNUP_USER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.SIGNOUT_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.SIGNOUT_USER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message,
+        name: action.payload.name,
+        email: action.payload.email,
+        avatar: action.payload.avatar,
+        bio: action.payload.bio
+      };
+    case userTypes.UPDATE_USER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
+    case userTypes.DELETE_USER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.message
+      };
     default:
       return state;
   }
