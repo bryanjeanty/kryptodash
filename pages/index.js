@@ -5,7 +5,8 @@ import { Signup } from "../client/components/index/Signup";
 import { Signin } from "../client/components/index/Signin";
 import { Greeting } from "../client/components/index/Greeting";
 import { Signout } from "../client/components/index/Signout";
-import { Results } from "../client/components/index/Results";
+import { SearchResults } from "../client/components/index/SearchResults";
+import { Pagination } from "../client/components/index/Pagination";
 
 class Index extends Component {
   // REMOVE -- NO LONGER USEFUL
@@ -45,7 +46,8 @@ class Index extends Component {
             <Signin />
           </div>
         )}
-        <Results />
+        <SearchResults />
+        <Pagination />
       </Fragment>
     );
   }

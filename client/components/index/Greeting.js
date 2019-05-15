@@ -1,31 +1,22 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import { connect } from "react-redux";
+import { requestUser } from "../../functions/index";
 // IMPORT ENCRYPT/DECRYPT LIBRARY
 
-export class Greeting extends Component {
-  // REMOVE ME
-  constructor(props) {
-    super(props);
+class Greeting extends Component {
+  componentDidMount() {
+    this.props.requestUser();
   }
 
   render() {
-    // REMOVE ME
-    const { session } = this.props;
+    const { name } = this.props.user;
 
-    // UPDATE TO GET SESSION FROM ENCRYPTED USER DATA STRING
-    let sessionName;
-    if (typeof session === "object") {
-      const name = session.firstName || session.userDataString.split("%")[1];
-      sessionName = name.charAt(0).toUpperCase() + name.slice(1);
-    } else {
-      sessionName = "";
-    }
-
-    return sessionName ? (
+    return name ? (
       <h4>
         Hello,{" "}
         <Link href="/dashboard">
-          <a>{sessionName}!</a>
+          <a>{name}!</a>
         </Link>
       </h4>
     ) : (
@@ -33,3 +24,8 @@ export class Greeting extends Component {
     );
   }
 }
+
+export default connect(
+  ({ user }) => ({ user }),
+  { requestUser }
+)(Greeting);

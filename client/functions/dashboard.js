@@ -1,8 +1,12 @@
-import { cmcLatestPath, cmcLimitQuery } from "../api/url";
 import { axiosCMC, axiosSession } from "../api/axios";
+import { cmcLatestPath, cmcLimitQuery } from "../api/url";
 
-export const getCMCCoins = async () => {
-  const { data } = await axiosCMC(cmcLatestPath, cmcLimitQuery);
+export const getCMCCoins = async (offset = 0) => {
+  const { data } = await axiosCMC({
+    path: cmcLatestPath,
+    query: cmcLimitQuery,
+    offset
+  });
   if (data) {
     return { data };
   } else {
@@ -10,21 +14,7 @@ export const getCMCCoins = async () => {
   }
 };
 
-export const getUser = async () => {
-  const userData = localStorage.getItem("userData");
-  let userId;
-  if (userData) {
-    userId = userData.split("%")[0];
-  }
-  const { data } = await axiosSession("get", `/users/${userId}`);
-  if (data) {
-    return { data };
-  } else {
-    return;
-  }
-};
-
-export const removeUserCoin = async id => {
+export const decreaseUserCoinList = async id => {
   const remove = confirm("Are you sure?");
   if (remove) {
     const userData = localStorage.getItem("userData");

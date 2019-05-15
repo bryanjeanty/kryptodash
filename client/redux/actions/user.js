@@ -1,5 +1,5 @@
 import { userTypes } from "./types/user";
-import { getUser } from "../../functions/dashboard";
+import { getUser } from "../../functions/index";
 
 export const requestUser = () => async dispatch => {
   dispatch({ type: userTypes.FETCHING });

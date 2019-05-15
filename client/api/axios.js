@@ -8,10 +8,11 @@ import {
 } from "./url";
 import { CMC_KEY } from "./env";
 
-export const axiosCMC = async (path, query) => {
+export const axiosCMC = async ({ path, query, offset } = {}) => {
+  const newQuery = offset ? `?start=${offset}&limit=15` : query;
   const axiosOpts = {
     method: "get",
-    url: proxyEndpoint + cmcHost + path + query,
+    url: proxyEndpoint + cmcHost + path + newQuery,
     withCredentials: false,
     headers: {
       "X-CMC_PRO_API_KEY": CMC_KEY
