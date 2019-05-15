@@ -21,10 +21,10 @@ export const axiosCMC = async ({ path, query, offset } = {}) => {
 
   try {
     const { data } = await axios(axiosOpts);
-    return { data };
+    return data;
   } catch (error) {
     console.error("API FETCH ERROR", error);
-    return;
+    return {};
   }
 };
 
@@ -33,15 +33,15 @@ export const axiosUser = async (method, path, payload = {}) => {
     method,
     url: serverHost + apiUsers + path,
     withCredentials: false,
-    data: payload ? payload : {}
+    data: payload
   };
 
   try {
     const { data } = await axios(axiosOpts);
-    return { data };
+    return data;
   } catch (error) {
     console.error("USER FETCH ERROR", error);
-    return;
+    return {};
   }
 };
 
@@ -50,14 +50,14 @@ export const axiosSession = async (method, path, payload = {}) => {
     method,
     url: serverHost + apiSession + path,
     withCredentials: true,
-    data: payload ? payload : {}
+    data: payload
   };
 
   try {
     const { data } = await axios(axiosOpts);
-    return { data };
+    return data;
   } catch (error) {
     console.error("SESSION FETCH ERROR", error);
-    return;
+    return {};
   }
 };

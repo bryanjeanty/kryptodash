@@ -9,7 +9,7 @@ import { updateUser, deleteUser } from "../../functions/settings";
 
 export const requestUser = () => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await getUser();
+  const data = await getUser();
   if (data) {
     return dispatch({
       type: userTypes.GET_USER_SUCCESS,
@@ -26,7 +26,7 @@ export const requestUser = () => async dispatch => {
 
 export const signin = user => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await signinUser(user);
+  const data = await signinUser(user);
   if (data) {
     return dispatch({
       type: userTypes.SIGNIN_USER_SUCCESS,
@@ -43,7 +43,7 @@ export const signin = user => async dispatch => {
 
 export const signup = user => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await signupUser(user);
+  const data = await signupUser(user);
   if (data) {
     return dispatch({
       type: userTypes.SIGNUP_USER_SUCCESS,
@@ -60,7 +60,7 @@ export const signup = user => async dispatch => {
 
 export const signout = () => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await signoutUser();
+  const data = await signoutUser();
   if (data) {
     return dispatch({
       type: userTypes.SIGNOUT_USER_SUCCESS,
@@ -76,7 +76,7 @@ export const signout = () => async dispatch => {
 
 export const update = user => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await updateUser(user);
+  const data = await updateUser(user);
   if (data) {
     return dispatch({
       type: userTypes.UPDATE_USER_SUCCESS,
@@ -93,7 +93,7 @@ export const update = user => async dispatch => {
 
 export const destroyUser = () => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
-  const { data } = await deleteUser();
+  const data = await deleteUser();
   if (data) {
     return dispatch({
       type: userTypes.DELETE_USER_SUCCESS,

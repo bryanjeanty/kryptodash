@@ -4,7 +4,7 @@ import { getUser, increaseUserCoinList } from "../../functions/index";
 
 export const requestCMCCoins = (offset = 0) => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const { data } = await getCMCCoins(offset);
+  const data = await getCMCCoins(offset);
   if (data) {
     return dispatch({
       type: coinTypes.GET_CMC_COINS_SUCCESS,
@@ -20,7 +20,7 @@ export const requestCMCCoins = (offset = 0) => async dispatch => {
 
 export const requestUserCoins = () => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const { data } = await getUser();
+  const data = await getUser();
   if (data) {
     return dispatch({
       type: coinTypes.GET_USER_COINS_SUCCESS,
@@ -36,7 +36,7 @@ export const requestUserCoins = () => async dispatch => {
 
 export const deleteUserCoin = id => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const { data } = await decreaseUserCoinList(id);
+  const data = await decreaseUserCoinList(id);
   if (data) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,
@@ -52,7 +52,7 @@ export const deleteUserCoin = id => async dispatch => {
 
 export const addUserCoin = id => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const { data } = await increaseUserCoinList(id);
+  const data = await increaseUserCoinList(id);
   if (data) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,

@@ -2,10 +2,10 @@ import { pageTypes } from "./types/page";
 
 export const decrementPage = event => dispatch => {
   if (event) {
-    event.preventDefault();
     dispatch({
       type: pageTypes.DECREMENT_PAGE_SUCCESS,
-      message: "Page successfully decremented!"
+      message: "Page successfully decremented!",
+      name: event.target.name
     });
   } else {
     dispatch({
@@ -17,10 +17,10 @@ export const decrementPage = event => dispatch => {
 
 export const incrementPage = event => dispatch => {
   if (event) {
-    event.preventDefault();
     dispatch({
       type: searchTypes.INCREMENT_PAGE_SUCCESS,
-      message: "Page successfully incremented!"
+      message: "Page successfully incremented!",
+      name: event.target.name
     });
   } else {
     dispatch({

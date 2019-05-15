@@ -2,15 +2,15 @@ import { axiosCMC, axiosSession } from "../api/axios";
 import { cmcLatestPath, cmcLimitQuery } from "../api/url";
 
 export const getCMCCoins = async (offset = 0) => {
-  const { data } = await axiosCMC({
+  const data = await axiosCMC({
     path: cmcLatestPath,
     query: cmcLimitQuery,
     offset
   });
   if (data) {
-    return { data };
+    return data;
   } else {
-    return;
+    return {};
   }
 };
 
@@ -22,7 +22,7 @@ export const decreaseUserCoinList = async id => {
     if (userData) {
       userId = userData.split("%")[0];
     }
-    const { data } = await axiosSession("get", `/users/${userId}`);
+    const data = await axiosSession("get", `/users/${userId}`);
     let coins;
     if (data) {
       coins = data.user.coins;
@@ -32,9 +32,9 @@ export const decreaseUserCoinList = async id => {
     if (response) {
       return response;
     } else {
-      return;
+      return {};
     }
   } else {
-    return;
+    return {};
   }
 };

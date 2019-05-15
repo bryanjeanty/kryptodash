@@ -8,6 +8,7 @@ export const pageReducer = (state = pageState, action) => {
         ...state,
         page: this.state.page - 1,
         offset: this.state.offset - 15,
+        name: action.name,
         message: action.message
       };
     case pageTypes.DECREMENT_PAGE_ERROR:
@@ -20,6 +21,7 @@ export const pageReducer = (state = pageState, action) => {
         ...state,
         page: this.state.page + 1,
         offset: this.state.offset + 15,
+        name: action.name,
         message: action.message
       };
     case pageTypes.INCREMENT_PAGE_ERROR:

@@ -2,20 +2,37 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { requestCMCCoins } from "../../redux/actions/coin";
 import { decrementPage, incrementPage } from "../../redux/actions/page";
+import { performSearch } from "../../redux/actions/search";
 
 class Pagination extends Component {
   decrement = async event => {
     event.preventDefault();
-    await this.props.decrementPage();
-    await this.props.requestCMCCoins(this.props.page.offset);
-    this.searchCryptos(event);
+    const {
+      page,
+      search,
+      coin,
+      decrementPage,
+      requestCMCCoins,
+      performSearch
+    } = this.props;
+    await decrementPage(event);
+    await requestCMCCoins(page.offset);
+    performSearch(search.input, coin.cmcCoins);
   };
 
   increment = async event => {
     event.preventDefault();
-    await this.props.incrementPage();
-    await this.props.requestCMCCoins(this.props.page.offset);
-    this.searchCryptos(event);
+    const {
+      page,
+      search,
+      coin,
+      incrementPage,
+      requestCMCCoins,
+      performSearch
+    } = this.props;
+    await incrementPage(event);
+    await requestCMCCoins(page.offset);
+    performSearch(search.input, coin.cmcCoins);
   };
 
   render() {
@@ -38,6 +55,6 @@ class Pagination extends Component {
 }
 
 export default connect(
-  ({ page }) => ({ page }),
-  { requestCMCCoins, decrementPage, incrementPage }
+  ({ page, search, coin }) => ({ page, search, coin }),
+  { requestCMCCoins, decrementPage, incrementPage, performSearch }
 )(Pagination);
