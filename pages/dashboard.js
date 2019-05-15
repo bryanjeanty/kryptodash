@@ -1,41 +1,16 @@
 import React, { Component, Fragment } from "react";
-import Router from "next/router";
 import Link from "next/link";
-import { withRouter } from "next/router";
-import { UserProfile } from "../client/components/dashboard/UserProfile";
-import { CoinList } from "../client/components/dashboard/CoinList";
+import UserProfile from "../client/components/dashboard/UserProfile";
+import CoinList from "../client/components/dashboard/CoinList";
+import { checkSession } from "../client/functions/pages";
 
 class Dashboard extends Component {
-  // PUT BODY IN FUNCTIONS
   static getInitialProps(ctx) {
-    let userData;
-    if (typeof window !== "undefined") {
-      userData = { userDataString: localStorage.getItem("userData") };
-      if (Object.keys(userData).length === 0) {
-        Router.replace("/");
-      }
-    } else {
-      if (ctx.req) {
-        userData = ctx.req.user;
-        if (
-          typeof userData === "undefined" ||
-          Object.keys(userData).length === 0
-        ) {
-          ctx.res.redirect("/");
-        }
-      }
-    }
-    return { userData };
+    const session = checkSession(ctx);
+    return { session };
   }
 
-  // REMOVE -- NO LONGER USEFUL
-  state = {
-    session: this.props.userData || ""
-  };
-
   render() {
-    // REMOVE -- NO LONGER USEFUL
-    const { session } = this.state;
     return (
       <Fragment>
         <Link href="/">
@@ -44,12 +19,11 @@ class Dashboard extends Component {
         <Link href="/settings">
           <a>Settings</a>
         </Link>
-        {/* REMOVE SESSION PROP/VARIABLE */}
-        <UserProfile session={session} />
-        <CoinList session={session} />
+        <UserProfile />
+        <CoinList />
       </Fragment>
     );
   }
 }
 
-export default withRouter(Dashboard);
+export default Dashboard;

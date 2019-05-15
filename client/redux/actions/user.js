@@ -91,18 +91,18 @@ export const update = user => async dispatch => {
   }
 };
 
-export const delete = () => async dispatch => {
+export const destroyUser = () => async dispatch => {
   dispatch({ type: userTypes.FETCHING });
   const { data } = await deleteUser();
   if (data) {
     return dispatch({
       type: userTypes.DELETE_USER_SUCCESS,
       message: data.message
-    })
+    });
   } else {
     return dispatch({
       type: userTypes.DELETE_USER_ERROR,
-      message: 'Error'
-    })
+      message: "Error"
+    });
   }
-}
+};

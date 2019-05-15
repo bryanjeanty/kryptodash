@@ -22,16 +22,18 @@ class Pagination extends Component {
     const { page } = this.props.page;
     const isDisabled = page === 1;
 
-    <div>
-      <input
-        type="button"
-        disabled={isDisabled}
-        onClick={this.decrement}
-        value="Prev"
-      />
-      <input type="button" onClick={this.increment} value="Next" />
-      <div>Page #: {page}</div>
-    </div>;
+    return (
+      <div>
+        <input
+          type="button"
+          disabled={isDisabled}
+          onClick={this.decrement}
+          value="Prev"
+        />
+        <input type="button" onClick={this.increment} value="Next" />
+        <div>Page #: {page}</div>
+      </div>
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { requestUser } from "../../functions/index";
+import { requestUser } from "../../redux/actions/user";
 // IMPORT ENCRYPT/DECRYPT LIBRARY
 
 class Greeting extends Component {

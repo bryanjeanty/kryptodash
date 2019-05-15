@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { update, delete, requestUser } from "../../redux/actions/user";
+import { update, destroyUser, requestUser } from "../../redux/actions/user";
 import Router, { withRouter } from "next/router";
 
 class UserEditForm extends Component {
@@ -21,24 +21,24 @@ class UserEditForm extends Component {
 
   updateUser = async event => {
     event.preventDefault();
-      const { name, email, bio } = this.state;
-      const user = { name, email, bio };
-      await this.props.update(user);
-      if (this.props.user.message !== 'Error') {
-        const { message, name, email, bio } = this.props.user;
-        await this.setState({ message, name, email, bio });
-        Router.replace('/dashboard')
-      }
+    const { name, email, bio } = this.state;
+    const user = { name, email, bio };
+    await this.props.update(user);
+    if (this.props.user.message !== "Error") {
+      const { message, name, email, bio } = this.props.user;
+      await this.setState({ message, name, email, bio });
+      Router.replace("/dashboard");
+    }
   };
 
   deleteUser = async () => {
     const destroy = confirm("Are you sure?");
     if (destroy) {
-      await this.props.delete();
-      if (this.props.user.message !== 'Error') {
-        await this.setState({ message: this.props.user.message })
+      await this.props.destroyUser();
+      if (this.props.user.message !== "Error") {
+        await this.setState({ message: this.props.user.message });
         setTimeout(() => {
-          Router.replace('/');
+          Router.replace("/");
         }, 250);
       }
     } else {
@@ -88,4 +88,7 @@ class UserEditForm extends Component {
   }
 }
 
-export default connect(({ user }) => ({ user }), { update, delete, requestUser })(UserEditForm);
+export default connect(
+  ({ user }) => ({ user }),
+  { update, destroyUser, requestUser }
+)(UserEditForm);

@@ -10,7 +10,7 @@ class Results extends Component {
   render() {
     const { coin, matches, page } = this.props;
 
-    return isLoading ? (
+    return coin.isLoading ? (
       <div>Loading...</div>
     ) : (
       <div>

@@ -1,41 +1,26 @@
 import React, { Component, Fragment } from "react";
-import { withRouter } from "next/router";
-import { Brand } from "../client/components/index/Brand";
-import { Signup } from "../client/components/index/Signup";
-import { Signin } from "../client/components/index/Signin";
-import { Greeting } from "../client/components/index/Greeting";
-import { Signout } from "../client/components/index/Signout";
-import { SearchResults } from "../client/components/index/SearchResults";
-import { Pagination } from "../client/components/index/Pagination";
+import Brand from "../client/components/index/Brand";
+import Signup from "../client/components/index/Signup";
+import Signin from "../client/components/index/Signin";
+import Greeting from "../client/components/index/Greeting";
+import Signout from "../client/components/index/Signout";
+import SearchResults from "../client/components/index/SearchResults";
+import Pagination from "../client/components/index/Pagination";
+import { getSession } from "../client/functions/pages";
 
 class Index extends Component {
-  // REMOVE -- NO LONGER USEFUL
   static getInitialProps(ctx) {
-    let userData;
-    if (typeof window !== "undefined") {
-      userData = { userDataString: localStorage.getItem("userData") };
-    } else {
-      if (ctx.req) {
-        userData = ctx.req.user;
-      }
-    }
-    return { userData };
+    const session = getSession(ctx);
+    return { session };
   }
 
-  // REMOVE -- NO LONGER USEFUL
-  state = {
-    session: this.props.userData || ""
-  };
-
   render() {
-    // REMOVE -- NO LONGER USEFUL
-    const { session } = this.state;
+    const { session } = this.props;
 
     return (
       <Fragment>
         <Brand />
-        {/* REMOVE SESSION PROP/VARIABLE */}
-        <Greeting session={session} />
+        <Greeting />
         {session ? (
           <div>
             <Signout />
@@ -53,4 +38,4 @@ class Index extends Component {
   }
 }
 
-export default withRouter(Index);
+export default Index;

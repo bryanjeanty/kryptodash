@@ -13,7 +13,6 @@ export const cmcHost = "https://pro-api.coinmarketcap.com";
 
 // API PATHS
 export const cmcLatestPath = "/v1/cryptocurrency/listings/latest";
-export const cmcHistoricalPath;
 
 // API QUERIES
 export const cmcLimitQuery = `?&limit=200`;
