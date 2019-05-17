@@ -6,8 +6,8 @@ export const pageReducer = (state = pageState, action) => {
     case pageTypes.DECREMENT_PAGE_SUCCESS:
       return {
         ...state,
-        page: this.state.page - 1,
-        offset: this.state.offset - 15,
+        page: state.page - 1,
+        offset: state.offset - 15,
         name: action.name,
         message: action.message
       };
@@ -19,8 +19,8 @@ export const pageReducer = (state = pageState, action) => {
     case pageTypes.INCREMENT_PAGE_SUCCESS:
       return {
         ...state,
-        page: this.state.page + 1,
-        offset: this.state.offset + 15,
+        page: state.page + 1,
+        offset: state.offset + 15,
         name: action.name,
         message: action.message
       };

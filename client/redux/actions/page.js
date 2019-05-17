@@ -18,13 +18,13 @@ export const decrementPage = event => dispatch => {
 export const incrementPage = event => dispatch => {
   if (event) {
     dispatch({
-      type: searchTypes.INCREMENT_PAGE_SUCCESS,
+      type: pageTypes.INCREMENT_PAGE_SUCCESS,
       message: "Page successfully incremented!",
       name: event.target.name
     });
   } else {
     dispatch({
-      type: searchTypes.INCREMENT_PAGE_ERROR,
+      type: pageTypes.INCREMENT_PAGE_ERROR,
       message: "Page failed to increment!"
     });
   }
