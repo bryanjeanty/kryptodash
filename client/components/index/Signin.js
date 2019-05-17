@@ -19,7 +19,7 @@ class Signin extends Component {
     const { email, password } = this.state;
     const user = { email, password };
     await this.props.signin(user);
-    if (this.props.user) {
+    if (this.props.user.message !== "Error") {
       this.setState({ message: this.props.user.message });
       Router.replace("/dashboard");
     }

@@ -4,11 +4,11 @@ import { getUser, increaseUserCoinList } from "../../functions/index";
 
 export const requestCMCCoins = (offset = 0) => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
-  const data = await getCMCCoins(offset);
-  if (data) {
+  const { data } = await getCMCCoins(offset);
+  if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.GET_CMC_COINS_SUCCESS,
-      message: data.message,
+      message: "Success",
       payload: data
     });
   }
@@ -21,7 +21,7 @@ export const requestCMCCoins = (offset = 0) => async dispatch => {
 export const requestUserCoins = () => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
   const data = await getUser();
-  if (data) {
+  if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.GET_USER_COINS_SUCCESS,
       message: data.message,
@@ -37,7 +37,7 @@ export const requestUserCoins = () => async dispatch => {
 export const deleteUserCoin = id => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
   const data = await decreaseUserCoinList(id);
-  if (data) {
+  if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,
       message: data.message,
@@ -45,7 +45,7 @@ export const deleteUserCoin = id => async dispatch => {
     });
   }
   return dispatch({
-    typs: coinTypes.UPDATE_USER_COINS_ERROR,
+    type: coinTypes.UPDATE_USER_COINS_ERROR,
     message: "User coin not removed!"
   });
 };
@@ -53,7 +53,7 @@ export const deleteUserCoin = id => async dispatch => {
 export const addUserCoin = id => async dispatch => {
   dispatch({ type: coinTypes.FETCHING });
   const data = await increaseUserCoinList(id);
-  if (data) {
+  if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,
       message: data.message,
@@ -61,7 +61,7 @@ export const addUserCoin = id => async dispatch => {
     });
   }
   return dispatch({
-    typs: coinTypes.UPDATE_USER_COINS_ERROR,
+    type: coinTypes.UPDATE_USER_COINS_ERROR,
     message: "User coin not added!"
   });
 };

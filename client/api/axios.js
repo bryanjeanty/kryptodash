@@ -21,6 +21,7 @@ export const axiosCMC = async ({ path, query, offset } = {}) => {
 
   try {
     const { data } = await axios(axiosOpts);
+    console.log(data);
     return data;
   } catch (error) {
     console.error("API FETCH ERROR", error);
@@ -55,6 +56,7 @@ export const axiosSession = async (method, path, payload = {}) => {
 
   try {
     const { data } = await axios(axiosOpts);
+    console.log(data);
     return data;
   } catch (error) {
     console.error("SESSION FETCH ERROR", error);

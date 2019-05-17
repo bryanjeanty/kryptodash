@@ -4,16 +4,18 @@ import { update, destroyUser, requestUser } from "../../redux/actions/user";
 import Router, { withRouter } from "next/router";
 
 class UserEditForm extends Component {
-  componentDidMount() {
-    this.props.requestUser();
-  }
-
   state = {
-    name: this.props.user.name,
-    email: this.props.user.email,
-    bio: this.props.user.bio,
+    name: "",
+    email: "",
+    bio: "",
     message: ""
   };
+
+  componentWillMount() {
+    this.props.requestUser();
+    const { name, email, bio } = this.props.user;
+    this.setState({ name, email, bio });
+  }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -51,12 +53,13 @@ class UserEditForm extends Component {
 
     return (
       <div>
+        <p>{message}</p>
         <form>
           <input
             name="name"
             type="text"
             placeholder="Update first name..."
-            value={firstName}
+            value={name}
             onChange={this.handleChange}
           />
           <input
@@ -82,7 +85,6 @@ class UserEditForm extends Component {
           />
         </form>
         <button onClick={this.deleteUser}>Delete</button>
-        <p>{message}</p>
       </div>
     );
   }
@@ -91,4 +93,4 @@ class UserEditForm extends Component {
 export default connect(
   ({ user }) => ({ user }),
   { update, destroyUser, requestUser }
-)(UserEditForm);
+)(withRouter(UserEditForm));

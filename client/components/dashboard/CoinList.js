@@ -4,7 +4,7 @@ import {
   requestCMCCoins,
   requestUserCoins,
   deleteUserCoin
-} from "../../redux/actions/coins";
+} from "../../redux/actions/coin";
 
 class CoinList extends Component {
   async componentDidMount() {
@@ -15,7 +15,7 @@ class CoinList extends Component {
   render() {
     const { coinIds, coinList, isLoading, message } = this.props.coin;
 
-    isLoading ? (
+    return isLoading ? (
       <div>Loading</div>
     ) : (
       <div>

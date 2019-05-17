@@ -13,7 +13,7 @@ export const userReducer = (state = userState, action) => {
         ...state,
         isLoading: false,
         message: action.message,
-        name: action.payload.name,
+        name: action.payload.firstName,
         email: action.payload.email,
         avatar: action.payload.avatar,
         bio: action.payload.bio

@@ -7,7 +7,7 @@ export const getUser = async () => {
   let userId;
   if (userData) {
     userId = userData.split("%")[0];
-    const data = await axiosSession("get", `/users/${userId}`);
+    const data = await axiosUser("get", `/${userId}`);
     if (data) {
       return data;
     } else {
@@ -23,12 +23,12 @@ export const increaseUserCoinList = async id => {
   const userData = localStorage.getItem("userData");
   if (userData) {
     const userId = userData.split("%")[0];
-    const data = await axiosSession("get", `/users/${userId}`);
+    const data = await axiosUser("get", `/${userId}`);
     let coins;
     if (data) {
       coins = [...data.user.coins, id];
     }
-    const response = await axiosSession("put", `/users/${userId}`, { coins });
+    const response = await axiosUser("put", `/${userId}`, { coins });
     if (response) {
       return response;
     } else {
@@ -36,13 +36,15 @@ export const increaseUserCoinList = async id => {
     }
   } else {
     alert("Must Have An Account In Order To Add To Favorites!!");
+    return {};
   }
 };
 
 // signin component
 export const signinUser = async user => {
-  const data = await axiosSession("post", "/signin", user);
+  const data = await axiosSession("post", "/signin", false, user);
   if (data) {
+    console.log(data);
     const { user } = data;
     const userDataString = `${user._id}%${user.firstName}%${user.email}`;
     localStorage.setItem("userData", userDataString);
@@ -54,7 +56,7 @@ export const signinUser = async user => {
 
 // signup component
 export const signupUser = async user => {
-  const { data } = await axiosUser("post", "/signup", user);
+  const data = await axiosUser("post", "/signup", user);
   if (data) {
     return data;
   } else {
@@ -64,7 +66,7 @@ export const signupUser = async user => {
 
 // signout component
 export const signoutUser = async () => {
-  const { data } = await axiosSession("get", "/signout");
+  const data = await axiosSession("get", "/signout");
   if (data) {
     localStorage.clear();
     return data;
@@ -75,7 +77,7 @@ export const signoutUser = async () => {
 
 // search results component
 export const findMatches = (input, coins) => {
-  if (input && coin) {
+  if (input && coins) {
     const options = { extract: coin => coin.name };
     const results = fuzzy.filter(input, coins, options);
     const matches = results.map(result => result.original);

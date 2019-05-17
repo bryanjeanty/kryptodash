@@ -18,18 +18,25 @@ class Signup extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+    let user;
     const { firstName, lastName, email, password } = this.state;
-    const user = { firstName, lastName, email, password };
+    user = { firstName, lastName, email, password };
     await this.props.signup(user);
-    if (this.props.user) {
+    if (this.props.user.message !== "Error") {
       const { message, email, password } = this.props.user;
       this.setState({ message });
       setTimeout(() => {
-        this.props.signin({ email, password });
+        user = { email, password };
+        this.props.signin(user);
         if (this.props.user.message !== "Error") {
-          Router.replace("/dashboard");
+          Router.replace("/");
         }
-      }, 250);
+      }, 500);
+    } else {
+      this.setState({ message: this.props.user.message });
+      // setTimeout(() => {
+      //   location.reload();
+      // }, 500);
     }
   };
 
@@ -39,7 +46,7 @@ class Signup extends Component {
     return (
       <div>
         <p>{message}</p>
-        <form onSubmit={this.handleSubmit}>
+        <form method="post" onSubmit={this.handleSubmit}>
           <input
             name="firstName"
             type="text"

@@ -18,7 +18,7 @@ export const typing = event => dispatch => {
 
 export const performSearch = (input, coins) => dispatch => {
   const matches = findMatches(input, coins);
-  if (matches) {
+  if (matches.length !== 0) {
     return dispatch({
       type: searchTypes.FOUND_MATCHES_SUCCESS,
       message: "Found matches",

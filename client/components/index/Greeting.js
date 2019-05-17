@@ -5,8 +5,8 @@ import { requestUser } from "../../redux/actions/user";
 // IMPORT ENCRYPT/DECRYPT LIBRARY
 
 class Greeting extends Component {
-  componentDidMount() {
-    this.props.requestUser();
+  async componentDidMount() {
+    await this.props.requestUser();
   }
 
   render() {

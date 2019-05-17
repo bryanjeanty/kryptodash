@@ -1,11 +1,11 @@
-import { axiosSession } from "../api/axios";
+import { axiosUser } from "../api/axios";
 
 export const updateUser = async user => {
   const userData = localStorage.getItem("userData");
   let userId;
   if (userData) {
     userId = userData.split("%")[0];
-    const data = await axiosSession("put", `/users/${userId}`, user);
+    const data = await axiosUser("put", `/${userId}`, user);
     if (data) {
       const userDataString = `${data.user._id}%${data.user.firstName}%${
         data.user.email
@@ -24,7 +24,7 @@ export const deleteUser = async () => {
   let userId;
   if (userData) {
     userId = userData.split("%")[0];
-    const data = await axiosSession("delete", `/users/${userId}`);
+    const data = await axiosUser("delete", `/${userId}`);
     if (data) {
       localStorage.clear();
       return data;

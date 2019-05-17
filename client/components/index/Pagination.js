@@ -6,7 +6,8 @@ import { performSearch } from "../../redux/actions/search";
 
 class Pagination extends Component {
   decrement = async event => {
-    event.preventDefault();
+    // event.preventDefault
+    event.persist();
     const {
       page,
       search,
@@ -21,7 +22,8 @@ class Pagination extends Component {
   };
 
   increment = async event => {
-    event.preventDefault();
+    // event.preventDefault();
+    event.persist();
     const {
       page,
       search,

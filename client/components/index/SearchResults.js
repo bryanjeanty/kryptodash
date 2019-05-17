@@ -5,14 +5,16 @@ import Results from "./Results";
 
 class SearchResults extends Component {
   handleChange = async event => {
+    event.persist();
     await this.props.typing(event);
     this.search(event);
   };
 
   search = event => {
-    event.preventDefault();
+    // event.preventDefault();
+    event.persist();
     const { search, coin, performSearch } = this.props;
-    performSearch(search, coin);
+    performSearch(search.input, coin.cmcCoins);
   };
 
   render() {

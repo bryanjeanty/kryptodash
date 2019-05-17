@@ -48,24 +48,30 @@ const validateNewUser = (request, response, next) => {
 const signupNewUser = async (request, response) => {
   const { firstName, lastName, email, password } = request.body;
 
-  const newUser = await new User({ firstName, lastName, email, password });
-  await User.register(newUser, password, (error, user) => {
-    if (!user) {
-      return response.status(400).json({ message: "User is undefined" });
-    }
-    if (error) {
-      return response.status(500).json(error.message);
-    }
+  const allUsers = await User.find({});
+  const sameEmail = allUsers.filter(user => user.email === email);
+  if (sameEmail.length !== 0) {
+    response.status(409).json({ message: "User already has an account!" });
+  } else {
+    const newUser = await new User({ firstName, lastName, email, password });
+    await User.register(newUser, password, (error, user) => {
+      if (!user) {
+        return response.status(400).json({ message: "User is undefined" });
+      }
+      if (error) {
+        return response.status(500).json(error.message);
+      }
 
-    // send specific data we want
-    const userData = {
-      user,
-      message: "Successfully registered new user!"
-    };
+      // send specific data we want
+      const userData = {
+        user,
+        message: "Successfully registered new user!"
+      };
 
-    // respond with user data in json format
-    response.json(userData);
-  });
+      // respond with user data in json format
+      response.json(userData);
+    });
+  }
 };
 
 // get all users in database
