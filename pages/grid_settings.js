@@ -1,40 +1,33 @@
 import React, { Component, Fragment } from "react";
 
-class GridIndex extends Component {
+class GridSettings extends Component {
   render() {
     return (
       <Fragment>
-        <div className="index">
+        <div className="settings">
           <div className="header">
             <div className="brand">Brand</div>
             <div className="cta-btn">Get Started</div>
           </div>
-          <div className="search">
-            <div className="search-bar">Search Bar</div>
-          </div>
-          <div className="coin-list">Coin List</div>
-          <div className="pagination">
-            <div className="prev">Prev</div>
-            <div className="next">Next</div>
-          </div>
+          <div className="form-container">Form Container</div>
           <div className="footer">
             <div className="secondary">Secondary</div>
             <div className="primary">Primary</div>
           </div>
         </div>
         <style jsx>{`
-          .index {
+          .settings {
             background-color: #eee;
             height: 100%;
             width: 85%;
             margin: 0 auto;
 
             display: grid;
-            grid-template-rows: repeat(2, 6rem) 32rem 6rem 20rem;
+            grid-template-rows: 6rem 32rem 20rem;
             grid-gap: 1.5rem;
           }
 
-          .index > * {
+          .settings > * {
             background-color: teal;
             color: white;
             font-size: 1.1rem;
@@ -51,54 +44,22 @@ class GridIndex extends Component {
           }
 
           .brand {
-            margin: 0 auto 0 0;
             height: 75%;
             width: 40%;
+            margin: 0 auto 0 0;
+            padding-left: 0.25rem;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
-            font-size: 1.5rem;
-            padding-left: 0.25rem;
           }
 
           .cta-btn {
-            margin: 0 0 0 auto;
             height: 60%;
             width: 6.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .search {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .search-bar {
-            background-color: orange;
-            height: 65%;
-            width: 80%;
-          }
-
-          .pagination {
-            display: flex;
-            align-items: center;
-          }
-
-          .pagination > * {
-            padding: 0.1 rem;
-            height: 50%;
-            width: 4rem;
-            background-color: orange;
-          }
-
-          .prev {
-            margin: 0 auto 0 0;
-          }
-
-          .next {
             margin: 0 0 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
           .footer {
@@ -127,4 +88,4 @@ class GridIndex extends Component {
   }
 }
 
-export default GridIndex;
+export default GridSettings;
