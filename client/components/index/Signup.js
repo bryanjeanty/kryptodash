@@ -34,9 +34,6 @@ class Signup extends Component {
       }, 500);
     } else {
       this.setState({ message: this.props.user.message });
-      // setTimeout(() => {
-      //   location.reload();
-      // }, 500);
     }
   };
 

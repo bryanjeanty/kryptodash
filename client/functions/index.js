@@ -42,7 +42,7 @@ export const increaseUserCoinList = async id => {
 
 // signin component
 export const signinUser = async user => {
-  const data = await axiosSession("post", "/signin", false, user);
+  const data = await axiosSession("post", "/signin", user);
   if (data) {
     console.log(data);
     const { user } = data;
