@@ -11,14 +11,12 @@ const validateNewUser = (request, response, next) => {
   // check & validate fields (first name, last name, email, password)
   // first name field
   request.checkBody("firstName", "Enter your first name").notEmpty();
-
   request
     .checkBody("firstName", "First name must be atleast 3 characters long")
     .isLength({ min: 3 });
 
   // last name field
   request.checkBody("lastName", "Enter your last name").notEmpty();
-
   request
     .checkBody("lastName", "Last name must be atleast two character long")
     .isLength({ min: 2 });
@@ -31,7 +29,6 @@ const validateNewUser = (request, response, next) => {
 
   // password field
   request.checkBody("password", "Enter a password").notEmpty();
-
   request
     .checkBody("password", "Password must be atleast 4 characters long")
     .isLength({ min: 4 });
@@ -51,24 +48,30 @@ const validateNewUser = (request, response, next) => {
 const signupNewUser = async (request, response) => {
   const { firstName, lastName, email, password } = request.body;
 
-  const newUser = await new User({ firstName, lastName, email, password });
-  await User.register(newUser, password, (error, user) => {
-    if (!user) {
-      return response.status(400).json({ message: "User is undefined" });
-    }
-    if (error) {
-      return response.status(500).json(error.message);
-    }
+  const allUsers = await User.find({});
+  const sameEmail = allUsers.filter(user => user.email === email);
+  if (sameEmail.length !== 0) {
+    response.status(409).json({ message: "User already has an account!" });
+  } else {
+    const newUser = await new User({ firstName, lastName, email, password });
+    await User.register(newUser, password, (error, user) => {
+      if (!user) {
+        return response.status(400).json({ message: "User is undefined" });
+      }
+      if (error) {
+        return response.status(500).json(error.message);
+      }
 
-    // send specific data we want
-    const userData = {
-      user,
-      message: "Successfully registered new user!"
-    };
+      // send specific data we want
+      const userData = {
+        user,
+        message: "Successfully registered new user!"
+      };
 
-    // respond with user data in json format
-    response.json(userData);
-  });
+      // respond with user data in json format
+      response.json(userData);
+    });
+  }
 };
 
 // get all users in database
@@ -114,7 +117,6 @@ const updateUser = async (request, response) => {
 
   // get fields from request body
   const { firstName, bio, email, password, avatar, coins } = request.body;
-
   const fields = { firstName, bio, email, password, avatar, coins };
 
   Object.keys(fields).forEach(key => {
@@ -161,8 +163,9 @@ const deleteUser = async (request, response) => {
       response.status(400).json({ message: "This user could not be found" });
     }
   });
-  response.clearCookie("krypto-connect.sid");
-  response.json({ message: "User successfully deleted" });
+  response
+    .clearCookie("krypto-connect.sid")
+    .json({ message: "User successfully deleted" });
 };
 
 module.exports = {

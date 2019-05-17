@@ -35,7 +35,7 @@ const checkSession = (request, response, next) => {
   if (request.isAuthenticated()) {
     next();
   }
-  response.redirect("/");
+  return response.redirect("/");
 };
 
 module.exports = { startSession, endSession, checkSession };
