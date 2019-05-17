@@ -14,7 +14,7 @@ class Signout extends Component {
       this.setState({ message: this.props.user.message });
       setTimeout(() => {
         location.reload();
-      }, 300);
+      }, 200);
     }
   };
 

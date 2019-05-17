@@ -28,10 +28,7 @@ class Signup extends Component {
       setTimeout(() => {
         user = { email, password };
         this.props.signin(user);
-        if (this.props.user.message !== "Error") {
-          Router.replace("/");
-        }
-      }, 500);
+      }, 200);
     } else {
       this.setState({ message: this.props.user.message });
     }

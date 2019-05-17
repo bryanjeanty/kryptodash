@@ -24,13 +24,13 @@ class UserEditForm extends Component {
   updateUser = async event => {
     event.preventDefault();
     const { name, email, bio } = this.state;
-    const user = { name, email, bio };
+    const user = { firstName: name, email, bio };
     await this.props.update(user);
     if (this.props.user.message !== "Error") {
       this.setState({ message: this.props.user.message });
       setTimeout(() => {
         Router.replace("/dashboard");
-      }, 300);
+      }, 200);
     }
   };
 

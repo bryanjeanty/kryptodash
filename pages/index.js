@@ -19,7 +19,7 @@ class Index extends Component {
       <Fragment>
         <Brand />
         <Greeting session={this.props.session} />
-        {this.props.session ? (
+        {Object.keys(this.props.session).length !== 0 ? (
           <div>
             <Signout />
           </div>

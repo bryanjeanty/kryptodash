@@ -7,6 +7,7 @@ export const updateUser = async user => {
     userId = userData.split("%")[0];
     const data = await axiosUser("put", `/${userId}`, user);
     if (data) {
+      console.log(data);
       const userDataString = `${data.user._id}%${data.user.firstName}%${
         data.user.email
       }`;

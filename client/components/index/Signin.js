@@ -21,7 +21,9 @@ class Signin extends Component {
     await this.props.signin(user);
     if (this.props.user.message !== "Error") {
       this.setState({ message: this.props.user.message });
-      Router.replace("/dashboard");
+      setTimeout(() => {
+        Router.replace("/dashboard");
+      }, 200);
     }
   };
 
