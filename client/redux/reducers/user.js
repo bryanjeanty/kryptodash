@@ -60,7 +60,11 @@ export const userReducer = (state = userState, action) => {
       return {
         ...state,
         isLoading: false,
-        message: action.message
+        message: action.message,
+        name: "",
+        email: "",
+        avatar: "",
+        bio: ""
       };
     case userTypes.SIGNOUT_USER_ERROR:
       return {
@@ -88,7 +92,11 @@ export const userReducer = (state = userState, action) => {
       return {
         ...state,
         isLoading: false,
-        message: action.message
+        message: action.message,
+        name: "",
+        email: "",
+        avatar: "",
+        bio: ""
       };
     case userTypes.DELETE_USER_ERROR:
       return {

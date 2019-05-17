@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Router, { withRouter } from "next/router";
 import { signout } from "../../redux/actions/user";
 
 class Signout extends Component {
@@ -12,6 +13,9 @@ class Signout extends Component {
     await this.props.signout();
     if (this.props.user.message != "Error") {
       this.setState({ message: this.props.user.message });
+      setTimeout(() => {
+        location.reload();
+      }, 300);
     }
   };
 
@@ -30,4 +34,4 @@ class Signout extends Component {
 export default connect(
   ({ user }) => ({ user }),
   { signout }
-)(Signout);
+)(withRouter(Signout));
