@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Router, { withRouter } from "next/router";
 import { signout } from "../../redux/actions/user";
 
 class Signout extends Component {
@@ -34,4 +33,4 @@ class Signout extends Component {
 export default connect(
   ({ user }) => ({ user }),
   { signout }
-)(withRouter(Signout));
+)(Signout);

@@ -8,7 +8,7 @@ import {
 import { updateUser, deleteUser } from "../../functions/settings";
 
 export const requestUser = () => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await getUser();
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -25,7 +25,7 @@ export const requestUser = () => async dispatch => {
 };
 
 export const signin = user => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await signinUser(user);
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -42,7 +42,7 @@ export const signin = user => async dispatch => {
 };
 
 export const signup = user => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await signupUser(user);
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -59,7 +59,7 @@ export const signup = user => async dispatch => {
 };
 
 export const signout = () => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await signoutUser();
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -75,7 +75,7 @@ export const signout = () => async dispatch => {
 };
 
 export const update = user => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await updateUser(user);
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -92,7 +92,7 @@ export const update = user => async dispatch => {
 };
 
 export const destroyUser = () => async dispatch => {
-  dispatch({ type: userTypes.FETCHING });
+  dispatch({ type: userTypes.FETCHING_USER });
   const data = await deleteUser();
   if (Object.keys(data).length !== 0) {
     return dispatch({

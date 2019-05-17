@@ -3,6 +3,6 @@ export const userState = {
   email: "",
   avatar: "",
   bio: "",
-  isLoading: false,
+  userLoading: false,
   message: ""
 };

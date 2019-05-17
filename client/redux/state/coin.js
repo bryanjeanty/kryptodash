@@ -1,6 +1,6 @@
 export const coinState = {
   userCoins: [],
   cmcCoins: [],
-  isLoading: false,
+  coinsLoading: false,
   message: ""
 };

@@ -41,7 +41,7 @@ class UserEditForm extends Component {
         await this.setState({ message: this.props.user.message });
         setTimeout(() => {
           Router.replace("/");
-        }, 250);
+        }, 300);
       }
     } else {
       this.setState({ message: "Woah! That was a close one!" });

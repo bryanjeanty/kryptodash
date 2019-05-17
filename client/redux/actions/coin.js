@@ -3,7 +3,7 @@ import { getCMCCoins, decreaseUserCoinList } from "../../functions/dashboard";
 import { getUser, increaseUserCoinList } from "../../functions/index";
 
 export const requestCMCCoins = (offset = 0) => async dispatch => {
-  dispatch({ type: coinTypes.FETCHING });
+  dispatch({ type: coinTypes.FETCHING_COINS });
   const { data } = await getCMCCoins(offset);
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -19,7 +19,7 @@ export const requestCMCCoins = (offset = 0) => async dispatch => {
 };
 
 export const requestUserCoins = () => async dispatch => {
-  dispatch({ type: coinTypes.FETCHING });
+  dispatch({ type: coinTypes.FETCHING_COINS });
   const data = await getUser();
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -35,7 +35,7 @@ export const requestUserCoins = () => async dispatch => {
 };
 
 export const deleteUserCoin = id => async dispatch => {
-  dispatch({ type: coinTypes.FETCHING });
+  dispatch({ type: coinTypes.FETCHING_COINS });
   const data = await decreaseUserCoinList(id);
   if (Object.keys(data).length !== 0) {
     return dispatch({
@@ -51,7 +51,7 @@ export const deleteUserCoin = id => async dispatch => {
 };
 
 export const addUserCoin = id => async dispatch => {
-  dispatch({ type: coinTypes.FETCHING });
+  dispatch({ type: coinTypes.FETCHING_COINS });
   const data = await increaseUserCoinList(id);
   if (Object.keys(data).length !== 0) {
     return dispatch({
