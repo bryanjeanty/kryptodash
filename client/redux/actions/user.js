@@ -91,9 +91,9 @@ export const update = user => async dispatch => {
   }
 };
 
-export const destroyUser = () => async dispatch => {
+export const destroyUser = id => async dispatch => {
   dispatch({ type: userTypes.FETCHING_USER });
-  const data = await deleteUser();
+  const data = await deleteUser(id);
   if (Object.keys(data).length !== 0) {
     return dispatch({
       type: userTypes.DELETE_USER_SUCCESS,

@@ -7,8 +7,7 @@ const {
   signupNewUser,
   getAllUsers,
   getUser,
-  updateUser,
-  deleteUser
+  updateUser
 } = require("../controllers/user");
 
 // load route error catcher
@@ -26,8 +25,7 @@ router.get("/", catchErrors(getAllUsers));
 router
   .route("/:id")
   .get(catchErrors(getUser))
-  .put(catchErrors(updateUser))
-  .delete(catchErrors(deleteUser));
+  .put(catchErrors(updateUser));
 
 // export
 module.exports = router;

@@ -18,17 +18,18 @@ class Signup extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    let user;
     const { firstName, lastName, email, password } = this.state;
-    user = { firstName, lastName, email, password };
+    const user = { firstName, lastName, email, password };
     await this.props.signup(user);
     if (this.props.user.message !== "Error") {
-      const { message, email, password } = this.props.user;
-      this.setState({ message });
-      setTimeout(() => {
-        user = { email, password };
-        this.props.signin(user);
-      }, 200);
+      this.setState({ message: this.props.message });
+      await this.props.signin(user);
+      if (this.props.user.message !== "Error") {
+        this.setState({ message: this.props.user.message });
+        setTimeout(() => {
+          Router.replace("/dashboard");
+        }, 200);
+      }
     } else {
       this.setState({ message: this.props.user.message });
     }

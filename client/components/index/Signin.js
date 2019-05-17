@@ -18,6 +18,7 @@ class Signin extends Component {
     event.preventDefault();
     const { email, password } = this.state;
     const user = { email, password };
+    console.log(user);
     await this.props.signin(user);
     if (this.props.user.message !== "Error") {
       this.setState({ message: this.props.user.message });

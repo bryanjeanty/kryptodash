@@ -36,8 +36,7 @@ export const increaseUserCoinList = async id => {
 // signin component
 export const signinUser = async user => {
   const data = await axiosSession("post", "/signin", user);
-  if (data) {
-    console.log(data);
+  if (Object.keys(data).length !== 0) {
     const { user } = data;
     const userDataString = `${user._id}%${user.firstName}%${user.email}`;
     localStorage.setItem("userData", userDataString);

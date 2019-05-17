@@ -13,13 +13,12 @@ class CoinList extends Component {
   }
 
   render() {
-    const { coinIds, coinList, coinsLoading, message } = this.props.coin;
+    const { coinIds, coinList, coinsLoading } = this.props.coin;
 
     return coinsLoading ? (
       <div>Loading</div>
     ) : (
       <div>
-        <p>{message}</p>
         <table>
           <thead>
             <tr>

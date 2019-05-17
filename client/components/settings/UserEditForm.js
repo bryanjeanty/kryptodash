@@ -38,12 +38,12 @@ class UserEditForm extends Component {
     event.preventDefault();
     const destroy = confirm("Are you sure?");
     if (destroy) {
-      await this.props.destroyUser();
+      await this.props.destroyUser(this.props.session);
       if (this.props.user.message !== "Error") {
         this.setState({ message: this.props.user.message });
         setTimeout(() => {
-          Router.replace("/");
-        }, 300);
+          location.reload();
+        }, 200);
       }
     } else {
       this.setState({ message: "Woah! That was a close one!" });
