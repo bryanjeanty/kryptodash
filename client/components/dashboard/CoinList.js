@@ -9,7 +9,7 @@ import {
 class CoinList extends Component {
   async componentDidMount() {
     await this.props.requestCMCCoins();
-    this.props.requestUserCoins();
+    this.props.requestUserCoins(this.props.session);
   }
 
   render() {

@@ -15,13 +15,11 @@ class Index extends Component {
   }
 
   render() {
-    const { session } = this.props;
-
     return (
       <Fragment>
         <Brand />
-        <Greeting />
-        {session ? (
+        <Greeting session={this.props.session} />
+        {this.props.session ? (
           <div>
             <Signout />
           </div>

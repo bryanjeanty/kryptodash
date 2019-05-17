@@ -18,9 +18,9 @@ export const requestCMCCoins = (offset = 0) => async dispatch => {
   });
 };
 
-export const requestUserCoins = () => async dispatch => {
+export const requestUserCoins = id => async dispatch => {
   dispatch({ type: coinTypes.FETCHING_COINS });
-  const data = await getUser();
+  const data = await getUser(id);
   if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.GET_USER_COINS_SUCCESS,

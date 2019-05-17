@@ -19,8 +19,8 @@ class Dashboard extends Component {
         <Link href="/settings">
           <a>Settings</a>
         </Link>
-        <UserProfile />
-        <CoinList />
+        <UserProfile session={this.props.session} />
+        <CoinList session={this.props.session} />
       </Fragment>
     );
   }

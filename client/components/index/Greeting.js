@@ -6,7 +6,7 @@ import { requestUser } from "../../redux/actions/user";
 
 class Greeting extends Component {
   async componentDidMount() {
-    await this.props.requestUser();
+    await this.props.requestUser(this.props.session);
   }
 
   render() {

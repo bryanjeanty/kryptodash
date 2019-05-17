@@ -5,7 +5,7 @@ import { requestUser } from "../../redux/actions/user";
 
 class UserProfile extends Component {
   componentDidMount() {
-    this.props.requestUser();
+    this.props.requestUser(this.props.session);
   }
 
   render() {
