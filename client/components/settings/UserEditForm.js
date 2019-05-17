@@ -11,8 +11,8 @@ class UserEditForm extends Component {
     message: ""
   };
 
-  componentWillMount() {
-    this.props.requestUser();
+  async componentDidMount() {
+    await this.props.requestUser(this.props.session);
     const { name, email, bio } = this.props.user;
     this.setState({ name, email, bio });
   }
@@ -27,18 +27,20 @@ class UserEditForm extends Component {
     const user = { name, email, bio };
     await this.props.update(user);
     if (this.props.user.message !== "Error") {
-      const { message, name, email, bio } = this.props.user;
-      await this.setState({ message, name, email, bio });
-      Router.replace("/dashboard");
+      this.setState({ message: this.props.user.message });
+      setTimeout(() => {
+        Router.replace("/dashboard");
+      }, 300);
     }
   };
 
   deleteUser = async () => {
+    event.preventDefault();
     const destroy = confirm("Are you sure?");
     if (destroy) {
       await this.props.destroyUser();
       if (this.props.user.message !== "Error") {
-        await this.setState({ message: this.props.user.message });
+        this.setState({ message: this.props.user.message });
         setTimeout(() => {
           Router.replace("/");
         }, 300);

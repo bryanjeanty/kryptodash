@@ -6,11 +6,11 @@ import Greeting from "../client/components/index/Greeting";
 import Signout from "../client/components/index/Signout";
 import SearchResults from "../client/components/index/SearchResults";
 import Pagination from "../client/components/index/Pagination";
-import { getSession } from "../client/functions/pages";
+import { checkSession } from "../client/functions/pages";
 
 class Index extends Component {
   static getInitialProps(ctx) {
-    const session = getSession(ctx);
+    const session = checkSession(ctx);
     return { session };
   }
 

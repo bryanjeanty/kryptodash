@@ -2,17 +2,10 @@ import { axiosSession, axiosUser } from "../api/axios";
 import fuzzy from "fuzzy";
 
 // general function to get a specific user
-export const getUser = async () => {
-  const userData = localStorage.getItem("userData");
-  let userId;
-  if (userData) {
-    userId = userData.split("%")[0];
-    const data = await axiosUser("get", `/${userId}`);
-    if (data) {
-      return data;
-    } else {
-      return {};
-    }
+export const getUser = async id => {
+  const data = await axiosUser("get", `/${id}`);
+  if (data) {
+    return data;
   } else {
     return {};
   }

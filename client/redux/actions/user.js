@@ -7,9 +7,9 @@ import {
 } from "../../functions/index";
 import { updateUser, deleteUser } from "../../functions/settings";
 
-export const requestUser = () => async dispatch => {
+export const requestUser = id => async dispatch => {
   dispatch({ type: userTypes.FETCHING_USER });
-  const data = await getUser();
+  const data = await getUser(id);
   if (Object.keys(data).length !== 0) {
     return dispatch({
       type: userTypes.GET_USER_SUCCESS,

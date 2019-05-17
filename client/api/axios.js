@@ -41,7 +41,7 @@ export const axiosUser = async (method, path, payload = {}) => {
     const { data } = await axios(axiosOpts);
     return data;
   } catch (error) {
-    console.error("USER FETCH ERROR", error);
+    console.error("USER FETCH ERROR", error.message);
     return {};
   }
 };

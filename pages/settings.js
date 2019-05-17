@@ -9,7 +9,7 @@ class Settings extends Component {
   }
 
   render() {
-    return <UserEditForm />;
+    return <UserEditForm session={this.props.session} />;
   }
 }
 
