@@ -1,18 +1,97 @@
 import React, { Component, Fragment } from "react";
+import { NavBar } from "../components/bootstrap/NavBar";
+import { Modal } from "../components/bootstrap/Modal";
+import { Search } from "../components/bootstrap/Search";
+import { Social } from "../components/bootstrap/Social";
+import { Footer } from "../components/bootstrap/Footer";
+import { Links } from "../components/bootstrap/Links";
+import Signup from "../components/index/Signup";
+import Signin from "../components/index/Signin";
+import { connect } from "react-redux";
+import { signup, signin } from "../redux/actions/user";
+import Router, { withRouter } from "next/router";
 
 class Layout extends Component {
+  handleSignup = async event => {
+    event.preventDefault();
+    const { firstName, lastName, email, password } = this.state;
+    const user = { firstName, lastName, email, password };
+    await this.props.signup(user);
+    if (this.props.user.message !== "Error") {
+      this.setState({ message: this.props.message });
+      await this.props.signin(user);
+      if (this.props.user.message !== "Error") {
+        this.setState({ message: this.props.user.message });
+        setTimeout(() => {
+          Router.replace("/dashboard");
+        }, 200);
+      }
+    } else {
+      this.setState({ message: this.props.user.message });
+    }
+  };
+
+  handleSignin = async event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+    const user = { email, password };
+    console.log(user);
+    await this.props.signin(user);
+    if (this.props.user.message !== "Error") {
+      this.setState({ message: this.props.user.message });
+      setTimeout(() => {
+        Router.replace("/dashboard");
+      }, 200);
+    }
+  };
+
   render() {
     return (
       <Fragment>
         <div className="layout">
           <div className="header">
-            <div className="brand">Brand</div>
-            <div className="cta-btn">Get Started</div>
+            <NavBar
+              brand={{
+                name: "KryptoDash",
+                url: "/"
+              }}
+              cta="Get Started"
+              actions={[
+                { name: "Sign Up", id: "#signup" },
+                { name: "Sign In", id: "#signin" }
+              ]}
+            />
+            <Modal
+              title="Sign Up"
+              modalId="signup"
+              action={{ name: "signup", handleClick: this.handleSignup }}
+            >
+              <Signup />
+            </Modal>
+            <Modal
+              title="Sign In"
+              modalId="signin"
+              action={{ name: "signin", handleClick: this.handleSignin }}
+            >
+              <Signin />
+            </Modal>
           </div>
           {this.props.children}
           <div className="footer">
-            <div className="secondary">Secondary</div>
-            <div className="primary">Primary</div>
+            <div className="secondary">
+              <div className="links">
+                <Links />
+              </div>
+              <div className="footer-search">
+                <Search />
+              </div>
+              <div className="social">
+                <Social />
+              </div>
+            </div>
+            <div className="primary">
+              <Footer />
+            </div>
           </div>
         </div>
         <style global jsx>{`
@@ -31,35 +110,10 @@ class Layout extends Component {
             background-color: teal;
             color: white;
             font-size: 1.1rem;
-            padding: 1rem;
           }
 
           .header {
             display: flex;
-            align-items: center;
-          }
-
-          .header > * {
-            background-color: orange;
-          }
-
-          .brand {
-            height: 75%;
-            width: 40%;
-            margin: 0 auto 0 0;
-            padding-left: 0.25rem;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-          }
-
-          .cta-btn {
-            height: 60%;
-            width: 6.5rem;
-            margin: 0 0 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
           }
 
           .footer {
@@ -69,12 +123,42 @@ class Layout extends Component {
           }
 
           .footer > * {
-            background-color: orange;
+            background-color: #222;
           }
 
           .secondary {
             grid-row: 1 / span 3;
             padding: 0.5rem;
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 0.25rem;
+          }
+
+          .secondary > * {
+            background-color: #111;
+          }
+
+          .links {
+            grid-row: 1 / 3;
+            grid-column: 1 / 2;
+          }
+
+          .footer-search {
+            grid-row: 1 / 2;
+            grid-column: 2 / 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .social {
+            grid-row: 2 / 3;
+            grid-column: 2 / 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
           }
 
           .primary {
@@ -88,4 +172,7 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default connect(
+  ({ user }) => ({ user }),
+  { signup, signin }
+)(withRouter(Layout));

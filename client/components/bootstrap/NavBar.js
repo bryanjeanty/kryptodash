@@ -28,7 +28,7 @@ export class NavBar extends Component {
             <ul className="navbar-nav ml-auto">
               <li key="item-1" className="nav-item active dropdown">
                 <a
-                  className="btn btn-primary nav-link dropdown-toggle"
+                  className="btn btn-outline-light nav-link dropdown-toggle"
                   id="navbarDropdown"
                   role="button"
                   data-toggle="dropdown"
@@ -57,8 +57,16 @@ export class NavBar extends Component {
           </div>
         </nav>
         <style jsx>{`
-          .btn-primary:hover {
+          .navbar {
+            width: 100%;
+            height: 100%;
+          }
+          .btn {
+            border-radius: 0;
+          }
+          .btn:hover {
             cursor: pointer;
+            background: none;
           }
         `}</style>
       </Fragment>

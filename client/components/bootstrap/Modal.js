@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 export class Modal extends Component {
   render() {
-    const { modalId, title, children } = this.props;
+    const { modalId, title, children, action } = this.props;
 
     return (
       <Fragment>
@@ -35,6 +35,15 @@ export class Modal extends Component {
                 </div>
                 <div className="modal-body">{children}</div>
                 <div className="modal-footer">
+                  <input
+                    className="btn btn-primary action-btn"
+                    name={action.name}
+                    type="submit"
+                    value={
+                      action.name.charAt(0).toUpperCase() + action.name.slice(1)
+                    }
+                    onClick={action.handleClick}
+                  />
                   <button
                     type="button"
                     className="btn btn-secondary"
@@ -47,7 +56,15 @@ export class Modal extends Component {
             </div>
           </div>
         </div>
-        <style jsx>{``}</style>
+        <style jsx>{`
+          .modal-title {
+            color: #333;
+          }
+
+          .action-btn {
+            display: ${action ? "block" : "none"};
+          }
+        `}</style>
       </Fragment>
     );
   }
