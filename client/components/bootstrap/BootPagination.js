@@ -1,22 +1,14 @@
 import React, { Component, Fragment } from "react";
 
-export class Pagination extends Component {
-  state = {
-    page: 0
-  };
-
-  componentDidMount() {
-    this.setState({ page: this.props.page });
-  }
-
+export class BootPagination extends Component {
   updatePage = num => {
-    if (this.state.page + num > 0) {
-      this.setState({ page: this.state.page + num });
+    if (this.props.page + num > 0) {
+      this.props.setPageNum(num);
     }
   };
 
   render() {
-    const { page } = this.state;
+    const { page } = this.props;
 
     const remainder = (page + 2) % 3;
     let start;

@@ -6,7 +6,7 @@ import { ListGroup } from "../client/components/bootstrap/ListGroup";
 import { Form } from "../client/components/bootstrap/Form";
 import { Modal } from "../client/components/bootstrap/Modal";
 import { NavBar } from "../client/components/bootstrap/NavBar";
-import { Pagination } from "../client/components/bootstrap/Pagination";
+import { BootPagination } from "../client/components/bootstrap/BootPagination";
 import { Spinner } from "../client/components/bootstrap/Spinner";
 import { Toast } from "../client/components/bootstrap/Toast";
 
@@ -84,7 +84,7 @@ class Bootstrap extends Component {
             <Modal modalId="signin" title="Sign In" />
           </div>
           <div className="my-pagination">
-            <Pagination page={1} />
+            <BootPagination page={1} />
           </div>
           <div className="my-spinner">
             <Spinner />

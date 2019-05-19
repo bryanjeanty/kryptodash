@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
 import Layout from "../client/components/Layout";
+import SearchResults from "../client/components/index/SearchResults";
+import Results from "../client/components/index/Results";
+import Pagination from "../client/components/index/Pagination";
 
 class GridIndex extends Component {
   render() {
@@ -8,12 +11,15 @@ class GridIndex extends Component {
         <Layout>
           <div className="index">
             <div className="search">
-              <div className="search-bar">Search Bar</div>
+              <div className="search-bar">
+                <SearchResults />
+              </div>
             </div>
-            <div className="coin-list">Coin List</div>
+            <div className="coin-table">
+              <Results />
+            </div>
             <div className="pagination">
-              <div className="prev">Prev</div>
-              <div className="next">Next</div>
+              <Pagination />
             </div>
           </div>
         </Layout>
@@ -26,7 +32,6 @@ class GridIndex extends Component {
 
           .index > * {
             background-color: orange;
-            padding: 0.5rem;
           }
 
           .search {
@@ -41,24 +46,23 @@ class GridIndex extends Component {
             width: 80%;
           }
 
-          .pagination {
+          .coin-table {
+            height: 100%;
+            width: 100%;
+            font-size: 0.95rem;
             display: flex;
+            justify-content: center;
             align-items: center;
           }
 
+          .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
           .pagination > * {
-            padding: 0.1 rem;
-            height: 50%;
-            width: 4rem;
             background-color: purple;
-          }
-
-          .prev {
-            margin: 0 auto 0 0;
-          }
-
-          .next {
-            margin: 0 0 0 auto;
           }
         `}</style>
       </Fragment>

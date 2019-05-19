@@ -3,28 +3,14 @@ import { pageState } from "../state/page";
 
 export const pageReducer = (state = pageState, action) => {
   switch (action.type) {
-    case pageTypes.DECREMENT_PAGE_SUCCESS:
+    case pageTypes.SET_PAGE_SUCCESS:
       return {
         ...state,
-        page: state.page - 1,
-        offset: state.offset - 15,
-        name: action.name,
-        message: action.message
+        message: action.message,
+        page: state.page + action.payload,
+        offset: state.offset + action.payload * 10
       };
-    case pageTypes.DECREMENT_PAGE_ERROR:
-      return {
-        ...state,
-        message: action.message
-      };
-    case pageTypes.INCREMENT_PAGE_SUCCESS:
-      return {
-        ...state,
-        page: state.page + 1,
-        offset: state.offset + 15,
-        name: action.name,
-        message: action.message
-      };
-    case pageTypes.INCREMENT_PAGE_ERROR:
+    case pageTypes.SET_PAGE_ERROR:
       return {
         ...state,
         message: action.message
