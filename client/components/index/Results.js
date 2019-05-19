@@ -38,15 +38,143 @@ class Results extends Component {
                           {search.matches.indexOf(match) + page.offset}
                         </th>
                         <td>{match.name}</td>
-                        <td>{match.quote.USD.market_cap.toFixed(2)}</td>
+                        <td>
+                          {String(Math.floor(match.quote.USD.market_cap))
+                            .length > 9
+                            ? "$" +
+                              String(match.quote.USD.market_cap).slice(
+                                0,
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length - 9
+                              ) +
+                              "." +
+                              String(match.quote.USD.market_cap).slice(
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length -
+                                  9 +
+                                  1,
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length -
+                                  9 +
+                                  3
+                              ) +
+                              " B"
+                            : String(Math.floor(match.quote.USD.market_cap))
+                                .length > 6
+                            ? "$" +
+                              String(match.quote.USD.market_cap).slice(
+                                0,
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length - 6
+                              ) +
+                              "." +
+                              String(match.quote.USD.market_cap).slice(
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length -
+                                  6 +
+                                  1,
+                                String(Math.floor(match.quote.USD.market_cap))
+                                  .length -
+                                  6 +
+                                  3
+                              ) +
+                              " M"
+                            : "$" +
+                              String(Math.floor(match.quote.USD.market_cap))}
+                        </td>
                         <td>{`$${match.quote.USD.price.toFixed(2)}`}</td>
                         <td>{`${match.quote.USD.percent_change_1h.toFixed(
                           2
                         )} %`}</td>
-                        <td>{`${match.circulating_supply.toFixed(2)} ${
-                          match.symbol
-                        }`}</td>
-                        <td>{`$${match.quote.USD.volume_24h.toFixed(2)}`}</td>
+                        <td>
+                          {String(Math.floor(match.circulating_supply)).length >
+                          9
+                            ? String(match.circulating_supply).slice(
+                                0,
+                                String(Math.floor(match.circulating_supply))
+                                  .length - 9
+                              ) +
+                              "." +
+                              String(match.circulating_supply).slice(
+                                String(Math.floor(match.circulating_supply))
+                                  .length -
+                                  9 +
+                                  1,
+                                String(Math.floor(match.circulating_supply))
+                                  .length -
+                                  9 +
+                                  3
+                              ) +
+                              " B " +
+                              match.symbol
+                            : String(Math.floor(match.circulating_supply))
+                                .length > 6
+                            ? String(match.circulating_supply).slice(
+                                0,
+                                String(Math.floor(match.circulating_supply))
+                                  .length - 6
+                              ) +
+                              "." +
+                              String(match.circulating_supply).slice(
+                                String(Math.floor(match.circulating_supply))
+                                  .length -
+                                  6 +
+                                  1,
+                                String(Math.floor(match.circulating_supply))
+                                  .length -
+                                  6 +
+                                  3
+                              ) +
+                              " M " +
+                              match.symbol
+                            : String(Math.floor(match.circulating_supply)) +
+                              " " +
+                              match.symbol}
+                        </td>
+                        <td>
+                          {String(Math.floor(match.quote.USD.volume_24h))
+                            .length > 9
+                            ? "$" +
+                              String(match.quote.USD.volume_24h).slice(
+                                0,
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length - 9
+                              ) +
+                              "." +
+                              String(match.quote.USD.volume_24h).slice(
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length -
+                                  9 +
+                                  1,
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length -
+                                  9 +
+                                  3
+                              ) +
+                              " B"
+                            : String(Math.floor(match.quote.USD.volume_24h))
+                                .length > 6
+                            ? "$" +
+                              String(match.quote.USD.volume_24h).slice(
+                                0,
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length - 6
+                              ) +
+                              "." +
+                              String(match.quote.USD.volume_24h).slice(
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length -
+                                  6 +
+                                  1,
+                                String(Math.floor(match.quote.USD.volume_24h))
+                                  .length -
+                                  6 +
+                                  3
+                              ) +
+                              " M"
+                            : "$" +
+                              String(Math.floor(match.quote.USD.volume_24h))}
+                        </td>
                         <td>
                           <input
                             className="btn btn-success"
@@ -221,10 +349,7 @@ class Results extends Component {
                 </tbody>
               ) : (
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td colSpan="3">No Data Found</td>
-                  </tr>
+                  <tr />
                 </tbody>
               )}
             </table>
@@ -233,18 +358,20 @@ class Results extends Component {
         <style jsx>{`
           .results {
             height: 100%;
-            width: 90%;
+            width: 100%;
           }
           table {
             height: 100%;
             width: 100%;
           }
           .dark-head {
-            background-color: #222;
+            background-color: #111;
           }
-          table,
           tr {
-            border: 0.75px solid #eee;
+            border-bottom: 0.75px solid #eee;
+          }
+          tr:last-child {
+            border-bottom: none;
           }
           th,
           td {

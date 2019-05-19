@@ -61,6 +61,9 @@ export class BootPagination extends Component {
           .disabled {
             cursor: initial;
           }
+          .page-item {
+            color: #222;
+          }
           .active:hover {
             color: #fff;
           }

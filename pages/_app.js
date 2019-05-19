@@ -23,9 +23,12 @@ class MyApp extends App {
 
           html,
           body,
-          ._next {
+          #_next {
             height: 100%;
             width: 100%;
+          }
+          body {
+            background-color: #ddd;
           }
         `}</style>
       </Fragment>

@@ -8,7 +8,7 @@ export class NavBar extends Component {
 
     return (
       <Fragment>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg">
           <Link href={brand.url}>
             <a className="navbar-brand">{brand.name}</a>
           </Link>
@@ -21,7 +21,7 @@ export class NavBar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" />
+            <i className="fas fa-bars" />
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -60,6 +60,14 @@ export class NavBar extends Component {
           .navbar {
             width: 100%;
             height: 100%;
+            background-color: #222;
+          }
+          .navbar-brand,
+          .fa-bars {
+            color: #eee;
+          }
+          .navbar-toggler:focus {
+            outline: none;
           }
           .btn {
             border-radius: 0;

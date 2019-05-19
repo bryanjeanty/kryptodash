@@ -96,18 +96,18 @@ class Layout extends Component {
         </div>
         <style global jsx>{`
           .layout {
-            background-color: #eee;
+            background-color: #ddd;
             height: 100%;
-            width: 85%;
+            width: 90%;
             margin: 0 auto;
 
             display: grid;
             grid-template-rows: 6rem minmax(30rem, auto) 20rem;
-            grid-gap: 1.5rem;
+            grid-gap: 0.75rem;
           }
 
           .layout > * {
-            background-color: teal;
+            background-color: #ddd;
             color: white;
             font-size: 1.1rem;
           }
@@ -119,7 +119,7 @@ class Layout extends Component {
           .footer {
             display: grid;
             grid-template-rows: repeat(4, 1fr);
-            grid-gap: 1.25rem;
+            grid-gap: 0.75rem;
           }
 
           .footer > * {

@@ -6,19 +6,21 @@ import { performSearch } from "../../redux/actions/search";
 import { BootPagination } from "../bootstrap/BootPagination";
 
 class Pagination extends Component {
-  setPageNum = async num => {
-    const {
-      page,
-      search,
-      coin,
-      setPage,
-      requestCMCCoins,
-      performSearch
-    } = this.props;
-    await setPage(num);
-    await requestCMCCoins(page.offset);
-    performSearch(search.input, coin.cmcCoins);
+  setPageNum = num => {
+    this.props.setPage(num);
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.page.offset !== prevProps.page.offset) {
+      this.props.requestCMCCoins(this.props.page.offset);
+      if (this.props.search.input) {
+        this.props.performSearch(
+          this.props.search.input,
+          this.props.coin.cmcCoins
+        );
+      }
+    }
+  }
 
   render() {
     const { page } = this.props.page;
