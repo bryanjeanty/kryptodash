@@ -1,5 +1,4 @@
 export const pageState = {
   page: 1,
-  offset: 1,
-  name: ""
+  offset: 1
 };

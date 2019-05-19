@@ -9,7 +9,7 @@ import {
 import { CMC_KEY } from "./env";
 
 export const axiosCMC = async ({ path, query, offset } = {}) => {
-  const newQuery = offset ? `?start=${offset}&limit=15` : query;
+  const newQuery = offset ? `?start=${offset}&limit=10` : query;
   const axiosOpts = {
     method: "get",
     url: proxyEndpoint + cmcHost + path + newQuery,

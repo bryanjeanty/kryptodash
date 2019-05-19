@@ -1,62 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { requestCMCCoins } from "../../redux/actions/coin";
-import { decrementPage, incrementPage } from "../../redux/actions/page";
+import { setPage } from "../../redux/actions/page";
 import { performSearch } from "../../redux/actions/search";
+import { BootPagination } from "../bootstrap/BootPagination";
 
 class Pagination extends Component {
-  decrement = async event => {
-    // event.preventDefault
-    event.persist();
-    const {
-      page,
-      search,
-      coin,
-      decrementPage,
-      requestCMCCoins,
-      performSearch
-    } = this.props;
-    await decrementPage(event);
-    await requestCMCCoins(page.offset);
-    performSearch(search.input, coin.cmcCoins);
+  setPageNum = num => {
+    this.props.setPage(num);
   };
 
-  increment = async event => {
-    // event.preventDefault();
-    event.persist();
-    const {
-      page,
-      search,
-      coin,
-      incrementPage,
-      requestCMCCoins,
-      performSearch
-    } = this.props;
-    await incrementPage(event);
-    await requestCMCCoins(page.offset);
-    performSearch(search.input, coin.cmcCoins);
-  };
+  componentDidUpdate(prevProps) {
+    if (this.props.page.offset !== prevProps.page.offset) {
+      this.props.requestCMCCoins(this.props.page.offset);
+      if (this.props.search.input) {
+        this.props.performSearch(
+          this.props.search.input,
+          this.props.coin.cmcCoins
+        );
+      }
+    }
+  }
 
   render() {
     const { page } = this.props.page;
-    const isDisabled = page === 1;
 
-    return (
-      <div>
-        <input
-          type="button"
-          disabled={isDisabled}
-          onClick={this.decrement}
-          value="Prev"
-        />
-        <input type="button" onClick={this.increment} value="Next" />
-        <div>Page #: {page}</div>
-      </div>
-    );
+    return <BootPagination page={page} setPageNum={this.setPageNum} />;
   }
 }
 
 export default connect(
   ({ page, search, coin }) => ({ page, search, coin }),
-  { requestCMCCoins, decrementPage, incrementPage, performSearch }
+  { requestCMCCoins, setPage, performSearch }
 )(Pagination);
