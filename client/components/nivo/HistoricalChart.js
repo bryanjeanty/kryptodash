@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import axios from "axios";
 import moment from "moment";
-import { CRYPTO_KEY } from "../client/api/env";
-import { proxyEndpoint } from "../client/api/url";
+import { CRYPTO_KEY } from "../../api/env";
+import { proxyEndpoint } from "../../api/url";
 
 const SECOND = 1;
 const MINUTE = 60 * SECOND;
@@ -12,11 +12,11 @@ const DAY = 24 * HOUR;
 const WEEK = 7 * DAY;
 const MONTH = 4 * WEEK;
 
-class MyChart extends Component {
+class HistoricalChart extends Component {
   state = {
     data: [
       {
-        id: "BTC",
+        id: this.props.symbol,
         color: "#000",
         data: []
       }
@@ -31,13 +31,15 @@ class MyChart extends Component {
     for (let i = 9; i >= 0; i--) {
       ts = moment().unix() - i * WEEK;
       response = await axios.get(
-        `${proxyEndpoint}https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=${ts}&api_key=${CRYPTO_KEY}`,
+        `${proxyEndpoint}https://min-api.cryptocompare.com/data/pricehistorical?fsym=${
+          this.props.symbol
+        }&tsyms=USD&ts=${ts}&api_key=${CRYPTO_KEY}`,
         { withCredentials: false }
       );
 
       historical[9 - i] = {
         x: `${moment.unix(ts).format("MM/DD/YYYY")}`,
-        y: response.data.BTC.USD
+        y: response.data[this.props.symbol].USD
       };
 
       data = { ...this.state.data };
@@ -62,7 +64,7 @@ class MyChart extends Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "BTC Historical Price Data",
+            legend: `${this.props.symbol} Historical Price Data`,
             legendOffset: -37,
             legendPosition: "middle"
           }}
@@ -81,7 +83,7 @@ class MyChart extends Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Historical",
+            legend: "Price",
             legendOffset: -40,
             legendPosition: "middle"
           }}
@@ -105,4 +107,4 @@ class MyChart extends Component {
   }
 }
 
-export default MyChart;
+export default HistoricalChart;

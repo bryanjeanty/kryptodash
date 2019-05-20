@@ -13,7 +13,7 @@ class CoinList extends Component {
   }
 
   render() {
-    const { coinIds, coinList, coinsLoading } = this.props.coin;
+    const { userCoins, cmcCoins, coinsLoading } = this.props.coin;
 
     return coinsLoading ? (
       <div>Loading</div>
@@ -33,10 +33,10 @@ class CoinList extends Component {
               <th>Remove</th>
             </tr>
           </thead>
-          {coinIds ? (
+          {userCoins ? (
             <tbody>
-              {coinList.map(coin => {
-                if (coinIds.includes(coin.id)) {
+              {cmcCoins.map(coin => {
+                if (userCoins.includes(coin.symbol.toUpperCase())) {
                   return (
                     <tr key={coin.id}>
                       <td>{coinIds.indexOf(coin.id) + 1}</td>
@@ -49,7 +49,9 @@ class CoinList extends Component {
                           type="button"
                           name="remove"
                           value="remove"
-                          onClick={() => this.props.deleteUserCoin(coin.id)}
+                          onClick={() =>
+                            this.props.deleteUserCoin(coin.symbol.toUpperCase())
+                          }
                         />
                       </td>
                     </tr>

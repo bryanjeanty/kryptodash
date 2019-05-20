@@ -181,7 +181,9 @@ class Results extends Component {
                             type="button"
                             name="add"
                             value="Add"
-                            onClick={() => this.props.addUserCoin(match.id)}
+                            onClick={() =>
+                              this.props.addUserCoin(match.symbol.toUpperCase())
+                            }
                           />
                         </td>
                       </tr>
@@ -340,7 +342,11 @@ class Results extends Component {
                             type="button"
                             name="add"
                             value="Add"
-                            onClick={() => this.props.addUserCoin(crypto.id)}
+                            onClick={() =>
+                              this.props.addUserCoin(
+                                cmcCoin.symbol.toUpperCase()
+                              )
+                            }
                           />
                         </td>
                       </tr>
