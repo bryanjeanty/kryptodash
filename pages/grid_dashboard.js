@@ -1,7 +1,14 @@
 import React, { Component, Fragment } from "react";
 import Layout from "../client/components/Layout";
+import { checkSession } from "../client/functions/pages";
+import UserChart from "../client/components/dashboard/UserChart";
 
 class GridDashboard extends Component {
+  static getInitialProps(ctx) {
+    const session = checkSession(ctx);
+    return { session };
+  }
+
   render() {
     return (
       <Fragment>
@@ -14,11 +21,7 @@ class GridDashboard extends Component {
             <div className="bio">Bio</div>
             <div className="coin-list">Coin List</div>
             <div className="coin-chart">
-              <div className="prev">Prev</div>
-              <div className="coin-logo">Coin Logo</div>
-              <div className="coin-title">Coin Title</div>
-              <div className="graph">Graph</div>
-              <div className="next">Next</div>
+              <UserChart session={this.props.session} />
             </div>
           </div>
         </Layout>
@@ -68,39 +71,8 @@ class GridDashboard extends Component {
           .coin-chart {
             grid-column: 1 / -1;
             display: grid;
-            grid-template-rows: repeat(5, 1fr);
-            grid-template-columns: 1fr 2fr 6fr 1fr;
-            grid-gap: 1.25rem;
-          }
-
-          .coin-chart > * {
-            background-color: purple;
-            padding: 0.5rem;
-          }
-
-          .prev {
-            grid-column: 1 / 2;
-            grid-row: 1 / -1;
-          }
-
-          .coin-logo {
-            grid-column: 2 / 3;
-            grid-row: 1 / span 3;
-          }
-
-          .coin-title {
-            grid-column: 2 / 3;
-            grid-row: 4 / -1;
-          }
-
-          .graph {
-            grid-column: 3 / 4;
-            grid-row: 1 / -1;
-          }
-
-          .next {
-            grid-column: 4 / 5;
-            grid-row: 1 / -1;
+            position: relative;
+            width: 100%;
           }
         `}</style>
       </Fragment>

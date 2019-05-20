@@ -90,7 +90,7 @@ class HistoricalChart extends Component {
         />
         <style jsx>{`
           .my-chart {
-            height: 50vh;
+            height: 20rem;
             width: 100%;
             background: white;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
