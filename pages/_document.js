@@ -35,6 +35,10 @@ class MyDocument extends Document {
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossOrigin="anonymous"
           />
+          <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.6.12/apexcharts.min.js"
+          />
         </Head>
         <body>
           <Main />
