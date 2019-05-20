@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import HistoricalChart from "../nivo/HistoricalChart";
+import { ChartCarousel } from "../nivo/ChartCarousel";
 import { requestCMCCoins, requestUserCoins } from "../../redux/actions/coin";
 
 class UserChart extends Component {
@@ -12,13 +12,7 @@ class UserChart extends Component {
   render() {
     return (
       <Fragment>
-        {this.props.coin.userCoins &&
-          this.props.coin.userCoins.map(usercoin => (
-            <HistoricalChart
-              key={this.props.coin.userCoins.indexOf(usercoin)}
-              symbol={usercoin}
-            />
-          ))}
+        <ChartCarousel coins={this.props.coin.userCoins} />
       </Fragment>
     );
   }
