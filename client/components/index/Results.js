@@ -19,7 +19,7 @@ class Results extends Component {
             <table>
               <thead className="dark-head">
                 <tr>
-                  <th scope="col">Item #</th>
+                  <th scope="col">Item</th>
                   <th scope="col">Name</th>
                   <th scope="col">Market Cap</th>
                   <th scope="col">Price</th>

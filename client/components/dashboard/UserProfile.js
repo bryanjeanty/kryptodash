@@ -1,22 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { requestUser } from "../../redux/actions/user";
 // IMPORT ENCRYPTION/DECRYPTION LIBRARY
 
 class UserProfile extends Component {
-  componentDidMount() {
-    this.props.requestUser(this.props.session);
-  }
-
   render() {
-    const { name, email, avatar, bio } = this.props.user;
+    const { name, avatar } = this.props.user;
 
     return (
-      <div>
-        <h3>{name}</h3>
+      <div className="user-avatar">
         <img src={avatar} alt={`${name}.png`} />
-        <p>{email}</p>
-        <p>{bio}</p>
+        <style jsx>{`
+          .user-avatar {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: fill;
+          }
+        `}</style>
       </div>
     );
   }
@@ -24,5 +31,5 @@ class UserProfile extends Component {
 
 export default connect(
   ({ user }) => ({ user }),
-  { requestUser }
+  null
 )(UserProfile);
