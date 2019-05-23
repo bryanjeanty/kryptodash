@@ -37,6 +37,7 @@ export class Modal extends Component {
                 <div className="modal-footer">
                   <input
                     className="btn btn-primary action-btn"
+                    data-dismiss="modal"
                     name={action.name}
                     type="submit"
                     value={

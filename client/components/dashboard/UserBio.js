@@ -7,7 +7,7 @@ class UserBio extends Component {
     const { bio, name } = this.props.user;
     return (
       <Fragment>
-        <Card title={name} info={bio} url="/grid_settings" />
+        <Card title={name} info={bio} url="/settings" />
       </Fragment>
     );
   }

@@ -2,11 +2,10 @@ import React, { Component } from "react";
 
 class Signin extends Component {
   render() {
-    const { handleChange, email, password, message } = this.props;
+    const { handleChange, email, password } = this.props;
 
     return (
       <div className="signin-form">
-        <p>{message}</p>
         <form>
           <div className="form-group">
             <label>Email</label>

@@ -44,7 +44,7 @@ class GridDashboard extends Component {
           .dashboard {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: 10rem 7rem 20rem;
+            grid-template-rows: 11rem 8rem 21rem;
             grid-gap: 1rem;
           }
 

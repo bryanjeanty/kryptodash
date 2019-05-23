@@ -16,8 +16,7 @@ class Layout extends Component {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
-    message: ""
+    password: ""
   };
 
   handleChange = event => {
@@ -30,16 +29,12 @@ class Layout extends Component {
     const user = { firstName, lastName, email, password };
     await this.props.signup(user);
     if (this.props.user.message !== "Error") {
-      this.setState({ message: this.props.message });
       await this.props.signin(user);
       if (this.props.user.message !== "Error") {
-        this.setState({ message: this.props.user.message });
-        setTimeout(() => {
-          Router.replace("/dashboard");
-        }, 200);
+        Router.replace("/dashboard");
       }
     } else {
-      this.setState({ message: this.props.user.message });
+      alert(this.props.user.message);
     }
   };
 
@@ -50,10 +45,9 @@ class Layout extends Component {
     console.log(user);
     await this.props.signin(user);
     if (this.props.user.message !== "Error") {
-      this.setState({ message: this.props.user.message });
-      setTimeout(() => {
-        Router.replace("/dashboard");
-      }, 200);
+      Router.replace("/dashboard");
+    } else {
+      alert(this.props.user.message);
     }
   };
 

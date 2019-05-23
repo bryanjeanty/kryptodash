@@ -2,18 +2,10 @@ import React, { Component } from "react";
 
 class Signup extends Component {
   render() {
-    const {
-      handleChange,
-      firstName,
-      lastName,
-      email,
-      password,
-      message
-    } = this.props;
+    const { handleChange, firstName, lastName, email, password } = this.props;
 
     return (
       <div className="signup-form">
-        <p>{message}</p>
         <form>
           <div className="form-group-inline">
             <div className="form-group">
