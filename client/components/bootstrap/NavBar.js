@@ -63,6 +63,11 @@ class NavBar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
+                    <Link href="/dashboard">
+                      <a className="dashboard-link dropdown-item btn btn-link">
+                        Dashboard
+                      </a>
+                    </Link>
                     <button
                       className="signout-btn dropdown-item btn btn-link"
                       type="button"
