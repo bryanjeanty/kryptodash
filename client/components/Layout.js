@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { NavBar } from "../components/bootstrap/NavBar";
+import NavBar from "../components/bootstrap/NavBar";
 import { Modal } from "../components/bootstrap/Modal";
 import { Search } from "../components/bootstrap/Search";
 import { Social } from "../components/bootstrap/Social";
@@ -63,14 +63,15 @@ class Layout extends Component {
         <div className="layout">
           <div className="header">
             <NavBar
+              session={this.props.session}
               brand={{
                 name: "KryptoDash",
                 url: "/"
               }}
               cta="Get Started"
               actions={[
-                { name: "Sign Up", id: "#signup" },
-                { name: "Sign In", id: "#signin" }
+                { name: "Sign Up", id: "signup" },
+                { name: "Sign In", id: "signin" }
               ]}
             />
             <Modal
@@ -120,7 +121,7 @@ class Layout extends Component {
         </div>
         <style global jsx>{`
           .layout {
-            background-color: #ddd;
+            background-color: #444;
             height: 100%;
             width: 90%;
             margin: 0 auto;
@@ -131,7 +132,7 @@ class Layout extends Component {
           }
 
           .layout > * {
-            background-color: #ddd;
+            background-color: #444;
             color: white;
             font-size: 1.1rem;
           }
@@ -147,20 +148,19 @@ class Layout extends Component {
           }
 
           .footer > * {
-            background-color: #222;
+            background-color: #444;
           }
 
           .secondary {
             grid-row: 1 / span 3;
-            padding: 0.5rem;
             display: grid;
             grid-template-rows: repeat(2, 1fr);
             grid-template-columns: repeat(2, 1fr);
-            grid-gap: 0.25rem;
+            grid-gap: 1rem;
           }
 
           .secondary > * {
-            background-color: #111;
+            background-color: #222;
           }
 
           .links {
@@ -189,6 +189,7 @@ class Layout extends Component {
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #222;
           }
         `}</style>
       </Fragment>

@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import UserEditForm from "../client/components/settings/UserEditForm";
+import Layout from "../client/components/Layout";
 import { checkSession } from "../client/functions/pages";
 
-class Settings extends Component {
+class GridSettings extends Component {
   static getInitialProps(ctx) {
     const session = checkSession(ctx);
     return { session };
   }
 
   render() {
-    return <UserEditForm session={this.props.session} />;
+    return (
+      <Layout>
+        <div className="form-container">Form Container</div>
+      </Layout>
+    );
   }
 }
 
-export default Settings;
+export default GridSettings;

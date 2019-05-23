@@ -28,7 +28,9 @@ class MyApp extends App {
             width: 100%;
           }
           body {
-            background-color: #ddd;
+            background-color: #444;
+            color: rgba(256, 256, 256, 0.7);
+            font-weight: 300;
           }
         `}</style>
       </Fragment>
