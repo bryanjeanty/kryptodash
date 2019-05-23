@@ -1,10 +1,16 @@
 {
   "name": "krypto_dash",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "cryptocurrency tracking application",
+  "main": "server/index.js",
+  "engines": {
+    "node": "10.15.3"
+  },
   "scripts": {
-    "start": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT"
   },
   "keywords": [],
   "author": "",
