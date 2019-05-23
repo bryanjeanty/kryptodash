@@ -12,6 +12,18 @@ import { signup, signin } from "../redux/actions/user";
 import Router, { withRouter } from "next/router";
 
 class Layout extends Component {
+  state = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    message: ""
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   handleSignup = async event => {
     event.preventDefault();
     const { firstName, lastName, email, password } = this.state;
@@ -66,14 +78,26 @@ class Layout extends Component {
               modalId="signup"
               action={{ name: "signup", handleClick: this.handleSignup }}
             >
-              <Signup />
+              <Signup
+                handleChange={this.handleChange}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                email={this.state.email}
+                password={this.state.password}
+                message={this.state.message}
+              />
             </Modal>
             <Modal
               title="Sign In"
               modalId="signin"
               action={{ name: "signin", handleClick: this.handleSignin }}
             >
-              <Signin />
+              <Signin
+                handleChange={this.handleChange}
+                email={this.state.email}
+                password={this.state.password}
+                message={this.state.message}
+              />
             </Modal>
           </div>
           {this.props.children}

@@ -3,8 +3,14 @@ import Layout from "../client/components/Layout";
 import SearchResults from "../client/components/index/SearchResults";
 import Results from "../client/components/index/Results";
 import Pagination from "../client/components/index/Pagination";
+import { checkSession } from "../client/functions/pages";
 
 class GridIndex extends Component {
+  static getInitialProps(ctx) {
+    const session = checkSession(ctx);
+    return { session };
+  }
+
   render() {
     return (
       <Fragment>

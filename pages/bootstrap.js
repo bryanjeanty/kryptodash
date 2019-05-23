@@ -15,7 +15,7 @@ class Bootstrap extends Component {
     return (
       <Fragment>
         <div className="bootstrap">
-          <div className="buttons">
+          {/* <div className="buttons">
             <Button color="primary" value="Primary" />
             <Button color="success" value="Success" />
             <Button color="danger" value="Danger" />
@@ -95,7 +95,7 @@ class Bootstrap extends Component {
               title="Error"
               message="User account already exist!"
             />
-          </div>
+          </div> */}
         </div>
         <style jsx>{`
           .bootstrap {

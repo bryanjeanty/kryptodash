@@ -14,7 +14,7 @@ export const getCMCCoins = async (offset = 0) => {
   }
 };
 
-export const decreaseUserCoinList = async id => {
+export const decreaseUserCoinList = async symbol => {
   const remove = confirm("Are you sure?");
   if (remove) {
     const userData = localStorage.getItem("userData");
@@ -27,7 +27,7 @@ export const decreaseUserCoinList = async id => {
     if (data) {
       coins = data.user.coins;
     }
-    coins.splice(coins.indexOf(id), 1);
+    coins.splice(coins.indexOf(symbol), 1);
     const response = await axiosUser("put", `/${userId}`, { coins });
     if (response) {
       return response;

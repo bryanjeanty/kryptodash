@@ -34,9 +34,9 @@ export const requestUserCoins = id => async dispatch => {
   });
 };
 
-export const deleteUserCoin = id => async dispatch => {
+export const deleteUserCoin = symbol => async dispatch => {
   dispatch({ type: coinTypes.FETCHING_COINS });
-  const data = await decreaseUserCoinList(id);
+  const data = await decreaseUserCoinList(symbol);
   if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,
@@ -50,9 +50,9 @@ export const deleteUserCoin = id => async dispatch => {
   });
 };
 
-export const addUserCoin = id => async dispatch => {
+export const addUserCoin = symbol => async dispatch => {
   dispatch({ type: coinTypes.FETCHING_COINS });
-  const data = await increaseUserCoinList(id);
+  const data = await increaseUserCoinList(symbol);
   if (Object.keys(data).length !== 0) {
     return dispatch({
       type: coinTypes.UPDATE_USER_COINS_SUCCESS,

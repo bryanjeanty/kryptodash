@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
       default: "Happy new user and cryptocurrency enthusiast!",
       required: true
     },
-    coins: [{ type: Number }]
+    coins: [{ type: String }]
   },
   { timestamps: true }
 );

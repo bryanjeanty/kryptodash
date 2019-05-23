@@ -12,14 +12,14 @@ export const getUser = async id => {
 };
 
 // pagination component
-export const increaseUserCoinList = async id => {
+export const increaseUserCoinList = async symbol => {
   const userData = localStorage.getItem("userData");
   if (userData) {
     const userId = userData.split("%")[0];
     const data = await axiosUser("get", `/${userId}`);
     let coins;
     if (data) {
-      coins = [...data.user.coins, id];
+      coins = [...data.user.coins, symbol];
     }
     const response = await axiosUser("put", `/${userId}`, { coins });
     if (response) {
