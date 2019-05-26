@@ -1,6 +1,6 @@
 # KryptoDash
 
-![kd_screenshot](./static/images/krypto_dash_IMG_V01.png =100%x)
+![kd_screenshot](./static/images/krypto_dash_IMG_V01.png)
 [KryptoDash](https://krypto-dash.herokuapp.com/) is a cryptocurrencty tracking application that allows users to monitor updates and trends relating to coins of interest on the market.
 
 ## Table of Contents
@@ -27,7 +27,7 @@ Initial conditions to get the most out of the code provided.
 **_Express_**: Node based server-side microframework used to whip up quick server and create REST API <br>
 **_React_**: Client-side framework used to compartmentalize and control various aspects of UI <br>
 **_Redux_**: Global client state management <br>
-**_Next_**: Server-side render react. Unify react and express in a clean fashion <br>
+**_Next_**: Server-side render react. Unify react and express <br>
 **_Nivo_**: Charting framework built on D3 used to render chart from server-side <br>
 
 View the [package.json](https://github.com/bryanjeanty/kryptodash/blob/master/package.json) to see additional technology used.
