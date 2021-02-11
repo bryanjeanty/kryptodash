@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@nivo/line": "^0.58.0",
-    "apexcharts": "^3.6.12",
+    "apexcharts": "^3.24.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "compression": "^1.7.4",
